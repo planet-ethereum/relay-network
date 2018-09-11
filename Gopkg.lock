@@ -22,12 +22,62 @@
   revision = "cff30e1d23fc9e800b2b5b4b41ef1817dda07e9f"
 
 [[projects]]
+  digest = "1:c166378e8ab0f794f293dfb941d250dd70b035b05dec58879f717621d0fe1714"
+  name = "github.com/deckarep/golang-set"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "1d4478f51bed434f1dadf96dcd9b43aabac66795"
+  version = "v1.7"
+
+[[projects]]
+  digest = "1:dfdc433ccad02f686c15ff6df95b396a4e353a510f1fb7b278784b765df9c2a2"
+  name = "github.com/ethereum/go-ethereum"
+  packages = [
+    ".",
+    "common",
+    "common/hexutil",
+    "common/math",
+    "core/types",
+    "crypto",
+    "crypto/secp256k1",
+    "crypto/sha3",
+    "ethclient",
+    "ethdb",
+    "log",
+    "metrics",
+    "p2p/netutil",
+    "params",
+    "rlp",
+    "rpc",
+    "trie",
+  ]
+  pruneopts = "UT"
+  revision = "89451f7c382ad2185987ee369f16416f89c28a7d"
+  version = "v1.8.15"
+
+[[projects]]
+  digest = "1:586ea76dbd0374d6fb649a91d70d652b7fe0ccffb8910a77468e7702e7901f3d"
+  name = "github.com/go-stack/stack"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2fee6af1a9795aafbe0253a0cfbdf668e1fb8a9a"
+  version = "v1.8.0"
+
+[[projects]]
   digest = "1:bbadccf3d3317ea03c0dac0b45b673b4b397c8f91a1d2eff550a3c51c4ad770e"
   name = "github.com/gogo/protobuf"
   packages = ["proto"]
   pruneopts = "UT"
   revision = "636bf0302bc95575d69441b25a2603156ffdddf1"
   version = "v1.1.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:4a0c6bb4805508a6287675fac876be2ac1182539ca8a32468d8128882e9d5009"
+  name = "github.com/golang/snappy"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
 
 [[projects]]
   branch = "master"
@@ -178,12 +228,41 @@
   version = "v1.0.2"
 
 [[projects]]
+  digest = "1:0b8dd7447e420afff0260179dc892711e837edd1d446bc78dab924624a3c3c81"
+  name = "github.com/rs/cors"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "3fb1b69b103a84de38a19c3c6ec073dd6caa4d3f"
+  version = "v1.5.0"
+
+[[projects]]
   digest = "1:919bb3aa6d9d0b67648c219fa4925312bc3c2872da19e818fa769e9c97a2b643"
   name = "github.com/spaolacci/murmur3"
   packages = ["."]
   pruneopts = "UT"
   revision = "9f5d223c60793748f04a9d5b4b4eacddfc1f755d"
   version = "v1.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:f2ffd421680b0a3f7887501b3c6974bcf19217ecd301d0e2c9b681940ec363d5"
+  name = "github.com/syndtr/goleveldb"
+  packages = [
+    "leveldb",
+    "leveldb/cache",
+    "leveldb/comparer",
+    "leveldb/errors",
+    "leveldb/filter",
+    "leveldb/iterator",
+    "leveldb/journal",
+    "leveldb/memdb",
+    "leveldb/opt",
+    "leveldb/storage",
+    "leveldb/table",
+    "leveldb/util",
+  ]
+  pruneopts = "UT"
+  revision = "ae2bd5eed72d46b28834ec3f60db3a3ebedd8dbd"
 
 [[projects]]
   branch = "master"
@@ -214,9 +293,12 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:76ee51c3f468493aff39dbacc401e8831fbb765104cbf613b89bef01cf4bad70"
+  digest = "1:290b8002a96a5f5c1bd8316884f6e2414f5fb1e46a22bbd5a1ff0d45dc944cb3"
   name = "golang.org/x/net"
-  packages = ["context"]
+  packages = [
+    "context",
+    "websocket",
+  ]
   pruneopts = "UT"
   revision = "161cd47e91fd58ac17490ef4d742dc98bb4cf60e"
 
@@ -232,9 +314,29 @@
   pruneopts = "UT"
   revision = "d0be0721c37eeb5299f245a996a483160fc36940"
 
+[[projects]]
+  branch = "v2"
+  digest = "1:0a2f4b974a413866afa1b41130d756643841fb9ad661b81c9a6dd9f1364ed19f"
+  name = "gopkg.in/karalabe/cookiejar.v2"
+  packages = ["collections/prque"]
+  pruneopts = "UT"
+  revision = "8dcd6a7f4951f6ff3ee9cbb919a06d8925822e57"
+
+[[projects]]
+  branch = "v2"
+  digest = "1:3d3f9391ab615be8655ae0d686a1564f3fec413979bb1aaf018bac1ec1bb1cc7"
+  name = "gopkg.in/natefinch/npipe.v2"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "c1b8fa8bdccecb0b8db834ee0b92fdbcfa606dd6"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/ipfs/go-ipfs-api"]
+  input-imports = [
+    "github.com/ethereum/go-ethereum/common",
+    "github.com/ethereum/go-ethereum/ethclient",
+    "github.com/ipfs/go-ipfs-api",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
