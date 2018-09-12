@@ -15,6 +15,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:7d191fd0c54ff370eaf6116a14dafe2a328df487baea280699f597aae858d00d"
+  name = "github.com/aristanetworks/goarista"
+  packages = ["monotime"]
+  pruneopts = "UT"
+  revision = "ff33da284e760fcdb03c33d37a719e5ed30ba844"
+
+[[projects]]
+  branch = "master"
   digest = "1:2c00f064ba355903866cbfbf3f7f4c0fe64af6638cc7d1b8bdcf3181bc67f1d8"
   name = "github.com/btcsuite/btcd"
   packages = ["btcec"]
@@ -30,19 +38,25 @@
   version = "v1.7"
 
 [[projects]]
-  digest = "1:dfdc433ccad02f686c15ff6df95b396a4e353a510f1fb7b278784b765df9c2a2"
+  digest = "1:8d1ce6ee39985fc4f2d90eb46b164d49bf3adc635ff770f1f3156980057e3f3d"
   name = "github.com/ethereum/go-ethereum"
   packages = [
     ".",
+    "accounts",
+    "accounts/abi",
+    "accounts/abi/bind",
+    "accounts/keystore",
     "common",
     "common/hexutil",
     "common/math",
+    "common/mclock",
     "core/types",
     "crypto",
     "crypto/secp256k1",
     "crypto/sha3",
     "ethclient",
     "ethdb",
+    "event",
     "log",
     "metrics",
     "p2p/netutil",
@@ -78,6 +92,14 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
+
+[[projects]]
+  digest = "1:3a26588bc48b96825977c1b3df964f8fd842cd6860cc26370588d3563433cf11"
+  name = "github.com/google/uuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "d460ce9f8df2e77fb1ba55ca87fafed96c607494"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -228,6 +250,22 @@
   version = "v1.0.2"
 
 [[projects]]
+  digest = "1:e5d0bd87abc2781d14e274807a470acd180f0499f8bf5bb18606e9ec22ad9de9"
+  name = "github.com/pborman/uuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "adf5a7427709b9deb95d29d3fa8a2bf9cfd388f1"
+  version = "v1.2"
+
+[[projects]]
+  digest = "1:8f4b365e527c00e2ba6b25a4c41ee7b84078c375fba83c971e54d2f0582df279"
+  name = "github.com/rjeczalik/notify"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0f065fa99b48b842c3fd3e2c8b194c6f2b69f6b8"
+  version = "v0.9.1"
+
+[[projects]]
   digest = "1:0b8dd7447e420afff0260179dc892711e837edd1d446bc78dab924624a3c3c81"
   name = "github.com/rs/cors"
   packages = ["."]
@@ -282,10 +320,12 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:4fd99b0bebac1d2165b2bc24c5247c25f441d27c0591a87d2718975a03359e6a"
+  digest = "1:c532dce0138306d043cd22a4e78162a09e1b318eab7b45c4ba6f2cf84e100d93"
   name = "golang.org/x/crypto"
   packages = [
     "blake2s",
+    "pbkdf2",
+    "scrypt",
     "sha3",
   ]
   pruneopts = "UT"
@@ -315,6 +355,18 @@
   revision = "d0be0721c37eeb5299f245a996a483160fc36940"
 
 [[projects]]
+  branch = "master"
+  digest = "1:45751dc3302c90ea55913674261b2d74286b05cdd8e3ae9606e02e4e77f4353f"
+  name = "golang.org/x/tools"
+  packages = [
+    "go/ast/astutil",
+    "imports",
+    "internal/fastwalk",
+  ]
+  pruneopts = "UT"
+  revision = "677d2ff680c188ddb7dcd2bfa6bc7d3f2f2f75b2"
+
+[[projects]]
   branch = "v2"
   digest = "1:0a2f4b974a413866afa1b41130d756643841fb9ad661b81c9a6dd9f1364ed19f"
   name = "gopkg.in/karalabe/cookiejar.v2"
@@ -334,8 +386,13 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/ethereum/go-ethereum",
+    "github.com/ethereum/go-ethereum/accounts/abi",
+    "github.com/ethereum/go-ethereum/accounts/abi/bind",
     "github.com/ethereum/go-ethereum/common",
+    "github.com/ethereum/go-ethereum/core/types",
     "github.com/ethereum/go-ethereum/ethclient",
+    "github.com/ethereum/go-ethereum/event",
     "github.com/ipfs/go-ipfs-api",
   ]
   solver-name = "gps-cdcl"

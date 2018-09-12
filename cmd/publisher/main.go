@@ -8,7 +8,7 @@ import (
 
 func main() {
 	sh := ipfs.NewShell("localhost:5001")
-	if err := sh.PubSubPublish("relay-network", "hi"); err != nil {
+	if err := sh.PubSubPublish("local-relay-network", "hi"); err != nil {
 		log.Fatalf("failed to publish to pubsub: %v", err)
 	}
 }
