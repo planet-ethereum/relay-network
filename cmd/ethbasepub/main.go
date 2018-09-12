@@ -29,7 +29,7 @@ func main() {
 	registryAddress := common.HexToAddress("0x8c42e8e89c4ee591d69fdc95803388d80290c46c")
 	subscriberAddress := common.HexToAddress("0x065e983f32f905afbb26e7dbbcd21141afce3145")
 
-	/*registry, err := ethbase.NewEthbase(registryAddress, client)
+	/*registry, err := ethbase.NewRegistry(registryAddress, client)
 	if err != nil {
 		log.Fatalf("failed to create registry instance: %v\n", err)
 	}*/

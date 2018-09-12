@@ -29,7 +29,7 @@ func SubmitTx(client *ethclient.Client, m relaynetwork.Message) error {
 		return errors.New("tx has wrong kind")
 	}
 
-	registry, err := NewEthbase(registryAddress, client)
+	registry, err := NewRegistry(registryAddress, client)
 	if err != nil {
 		return errors.Wrap(err, "creating registry instance failed")
 	}
@@ -42,7 +42,7 @@ func SubmitTx(client *ethclient.Client, m relaynetwork.Message) error {
 }
 
 func GetSubscriptions(client *ethclient.Client, address common.Address) ([]Subscription, error) {
-	/*registry, err := NewEthbase(address, client)
+	/*registry, err := NewRegistry(address, client)
 	if err != nil {
 		return nil, errors.Wrap(err, "creating registry instance failed")
 	}*/
@@ -52,7 +52,7 @@ func GetSubscriptions(client *ethclient.Client, address common.Address) ([]Subsc
 		return nil, errors.Wrap(err, "failed to fetch past logs")
 	}
 
-	contractAbi, err := abi.JSON(strings.NewReader(string(EthbaseABI)))
+	contractAbi, err := abi.JSON(strings.NewReader(string(RegistryABI)))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to construct abi from json")
 	}
