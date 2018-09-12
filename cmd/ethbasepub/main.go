@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"log"
 
 	ethereum "github.com/ethereum/go-ethereum"
@@ -9,6 +10,9 @@ import (
 	types "github.com/ethereum/go-ethereum/core/types"
 	ethclient "github.com/ethereum/go-ethereum/ethclient"
 	ipfs "github.com/ipfs/go-ipfs-api"
+
+	relaynetwork "github.com/planet-ethereum/relay-network"
+	ethbase "github.com/planet-ethereum/relay-network/ethbase"
 )
 
 func main() {
@@ -22,14 +26,19 @@ func main() {
 	}
 
 	emitterAddress := common.HexToAddress("0xfc8e2b378a37ea51b90049df56fad5f44cd35daf")
-	// registryAddress := common.HexToAddress("0x8c42e8e89c4ee591d69fdc95803388d80290c46c")
+	registryAddress := common.HexToAddress("0x8c42e8e89c4ee591d69fdc95803388d80290c46c")
+	subscriberAddress := common.HexToAddress("0x065e983f32f905afbb26e7dbbcd21141afce3145")
 
-	// Test client
-	balance, err := client.BalanceAt(context.Background(), emitterAddress, nil)
+	/*registry, err := ethbase.NewEthbase(registryAddress, client)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("failed to create registry instance: %v\n", err)
+	}*/
+
+	subscriptions, err := ethbase.GetSubscriptions(client, registryAddress)
+	for _, s := range subscriptions {
+		eventId := s.EventId[:]
+		log.Printf("Sub: %v\n", common.Bytes2Hex(eventId))
 	}
-	log.Println(balance)
 
 	query := ethereum.FilterQuery{
 		Addresses: []common.Address{
@@ -51,9 +60,20 @@ func main() {
 			sub.Unsubscribe()
 			log.Fatal(err)
 		case vLog := <-logs:
-			log.Printf("incoming log: %s\n", vLog.Address.Hex())
-			log.Printf("data: %v\n", vLog.Data)
-			err = sh.PubSubPublish("local-relay-network", vLog.Address.Hex())
+			m := relaynetwork.Message{
+				Kind: "etherbase",
+				To:   subscriberAddress.Hex(),
+				Data: vLog.Data,
+			}
+
+			marshalized, err := json.Marshal(m)
+			if err != nil {
+				log.Fatalf("failed to marshalize message: %v\n", err)
+			}
+
+			if err = sh.PubSubPublish("local-relay-network", string(marshalized)); err != nil {
+				log.Fatalf("failed to publish to pubsub: %v\n", err)
+			}
 		}
 	}
 }
