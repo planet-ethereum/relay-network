@@ -1,0 +1,100 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "eventId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "emitter",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "eventName_",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "method",
+        "type": "bytes4"
+      }
+    ],
+    "name": "Subscribed",
+    "type": "event"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "emitter_",
+        "type": "address"
+      },
+      {
+        "name": "eventName_",
+        "type": "bytes32"
+      },
+      {
+        "name": "account_",
+        "type": "address"
+      },
+      {
+        "name": "method_",
+        "type": "bytes4"
+      }
+    ],
+    "name": "subscribe",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "eventId_",
+        "type": "bytes32"
+      },
+      {
+        "name": "account_",
+        "type": "address"
+      }
+    ],
+    "name": "unsubscribe",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "eventId_",
+        "type": "bytes32"
+      },
+      {
+        "name": "account_",
+        "type": "address"
+      },
+      {
+        "name": "args_",
+        "type": "bytes"
+      }
+    ],
+    "name": "invoke",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
