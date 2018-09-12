@@ -1,4 +1,6 @@
 # Relay Network
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/planet-ethereum/Lobby)
+
 ## Motivation
 Various projects aim to improve user experience by enabling recurring fee subscriptions, delegated conditional execution or sponsored gas. These second layer execution markets all share the need for a relayer that submits signed user transactions to the network.
 
