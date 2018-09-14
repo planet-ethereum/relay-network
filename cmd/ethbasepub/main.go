@@ -11,7 +11,7 @@ import (
 	ethclient "github.com/ethereum/go-ethereum/ethclient"
 	ipfs "github.com/ipfs/go-ipfs-api"
 
-	relaynetwork "github.com/planet-ethereum/relay-network"
+	//relaynetwork "github.com/planet-ethereum/relay-network"
 	ethbase "github.com/planet-ethereum/relay-network/ethbase"
 )
 
@@ -27,17 +27,15 @@ func main() {
 
 	emitterAddress := common.HexToAddress("0xfc8e2b378a37ea51b90049df56fad5f44cd35daf")
 	registryAddress := common.HexToAddress("0x8c42e8e89c4ee591d69fdc95803388d80290c46c")
-	subscriberAddress := common.HexToAddress("0x065e983f32f905afbb26e7dbbcd21141afce3145")
+	//subscriberAddress := common.HexToAddress("0x065e983f32f905afbb26e7dbbcd21141afce3145")
 
-	/*registry, err := ethbase.NewRegistry(registryAddress, client)
+	instance, err := ethbase.NewEthbase(client, registryAddress)
 	if err != nil {
-		log.Fatalf("failed to create registry instance: %v\n", err)
-	}*/
+		log.Fatalf("failed to create ethbase instance: %v\n", err)
+	}
 
-	subscriptions, err := ethbase.GetSubscriptions(client, registryAddress)
-	for _, s := range subscriptions {
-		eventId := s.EventId[:]
-		log.Printf("Sub: %v\n", common.Bytes2Hex(eventId))
+	if err = instance.Initialize(); err != nil {
+		log.Fatalf("failed to initialize ethbase: %v\n", err)
 	}
 
 	query := ethereum.FilterQuery{
@@ -60,10 +58,10 @@ func main() {
 			sub.Unsubscribe()
 			log.Fatal(err)
 		case vLog := <-logs:
-			m := relaynetwork.Message{
-				Kind: "etherbase",
-				To:   subscriberAddress.Hex(),
-				Data: vLog.Data,
+			m, ok := instance.LogToMessage(vLog)
+			if !ok {
+				log.Printf("invalid log: %v\n", vLog)
+				continue
 			}
 
 			marshalized, err := json.Marshal(m)
