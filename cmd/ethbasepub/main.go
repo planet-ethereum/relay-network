@@ -9,15 +9,15 @@ import (
 	common "github.com/ethereum/go-ethereum/common"
 	types "github.com/ethereum/go-ethereum/core/types"
 	ethclient "github.com/ethereum/go-ethereum/ethclient"
-	ipfs "github.com/ipfs/go-ipfs-api"
 
 	//relaynetwork "github.com/planet-ethereum/relay-network"
 	ethbase "github.com/planet-ethereum/relay-network/ethbase"
+	ipfs "github.com/planet-ethereum/relay-network/ipfs"
 )
 
 func main() {
 	// Connect to IPFS
-	sh := ipfs.NewShell("localhost:5001")
+	ps := ipfs.NewIPFSPub("localhost:5001", "local-relay-network")
 
 	// Connect to Ethereum client
 	client, err := ethclient.Dial("wss://ropsten.infura.io/ws")
@@ -69,7 +69,7 @@ func main() {
 				log.Fatalf("failed to marshalize message: %v\n", err)
 			}
 
-			if err = sh.PubSubPublish("local-relay-network", string(marshalized)); err != nil {
+			if err = ps.Publish(string(marshalized)); err != nil {
 				log.Fatalf("failed to publish to pubsub: %v\n", err)
 			}
 		}

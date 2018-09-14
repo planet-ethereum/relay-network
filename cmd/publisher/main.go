@@ -3,12 +3,12 @@ package main
 import (
 	"log"
 
-	ipfs "github.com/ipfs/go-ipfs-api"
+	ipfs "github.com/planet-ethereum/relay-network/ipfs"
 )
 
 func main() {
-	sh := ipfs.NewShell("localhost:5001")
-	if err := sh.PubSubPublish("local-relay-network", "hi"); err != nil {
+	ps := ipfs.NewIPFSPub("localhost:5001", "local-relay-network")
+	if err := ps.Publish("hi"); err != nil {
 		log.Fatalf("failed to publish to pubsub: %v", err)
 	}
 }

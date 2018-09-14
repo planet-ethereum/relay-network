@@ -7,18 +7,17 @@ import (
 
 	common "github.com/ethereum/go-ethereum/common"
 	ethclient "github.com/ethereum/go-ethereum/ethclient"
-	ipfs "github.com/ipfs/go-ipfs-api"
 
 	relaynetwork "github.com/planet-ethereum/relay-network"
 	ethbase "github.com/planet-ethereum/relay-network/ethbase"
+	ipfs "github.com/planet-ethereum/relay-network/ipfs"
 	wallet "github.com/planet-ethereum/relay-network/wallet"
 	//safe "github.com/planet-ethereum/relay-network/safe"
 )
 
 func main() {
 	// Connect to IPFS
-	sh := ipfs.NewShell("localhost:5001")
-	sub, err := sh.PubSubSubscribe("local-relay-network")
+	ps, err := ipfs.NewIPFSPubSub("localhost:5001", "local-relay-network")
 	if err != nil {
 		log.Fatalf("failed to subscribe to pubsub: %v", err)
 	}
@@ -53,9 +52,11 @@ func main() {
 		log.Fatalf("failed to initialize ethbase: %v\n", err)
 	}
 
+	log.Println("Starting to listen to pubsub topic")
+
 	// Run pubsub event loop
 	ch := make(chan []byte)
-	go listen(sub, ch)
+	go ps.Listen(ch)
 
 	for {
 		raw := <-ch
@@ -69,18 +70,5 @@ func main() {
 				log.Printf("error: failed to submit tx: %v\n", err)
 			}
 		}
-	}
-}
-
-func listen(sub *ipfs.PubSubSubscription, ch chan []byte) {
-	log.Println("Starting to listen to pubsub topic")
-
-	for {
-		rec, err := sub.Next()
-		if err != nil {
-			log.Fatalf("failed to wait for msg: %v", err)
-		}
-
-		ch <- rec.Data()
 	}
 }
