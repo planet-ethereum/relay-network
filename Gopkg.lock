@@ -23,11 +23,29 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:2c00f064ba355903866cbfbf3f7f4c0fe64af6638cc7d1b8bdcf3181bc67f1d8"
+  digest = "1:de159229e3cb736ff6a51c904bfdd6fd69c33484832375388de2b640c1594e4d"
   name = "github.com/btcsuite/btcd"
-  packages = ["btcec"]
+  packages = [
+    "btcec",
+    "chaincfg",
+    "chaincfg/chainhash",
+    "wire",
+  ]
   pruneopts = "UT"
   revision = "cff30e1d23fc9e800b2b5b4b41ef1817dda07e9f"
+
+[[projects]]
+  branch = "master"
+  digest = "1:5be1c66caeb03381e4e7322eddfc0b06b26991ddba3ad39e009ccf67c20dfb18"
+  name = "github.com/btcsuite/btcutil"
+  packages = [
+    ".",
+    "base58",
+    "bech32",
+    "hdkeychain",
+  ]
+  pruneopts = "UT"
+  revision = "ab6388e0c60ae4834a1f57511e20c17b5f78be4b"
 
 [[projects]]
   digest = "1:c166378e8ab0f794f293dfb941d250dd70b035b05dec58879f717621d0fe1714"
@@ -183,6 +201,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:55f5a3159b17b3056d62fba48ecb88f2410abd919da9a87c33fbab2dfe1ada62"
+  name = "github.com/miguelmota/go-ethereum-hdwallet"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "ba235ac57e3a3e974ec7cca7ca16a80fa01be844"
+
+[[projects]]
+  branch = "master"
   digest = "1:130cefe87d7eeefc824978dcb78e35672d4c49a11f25c153fbf0cfd952756fa3"
   name = "github.com/minio/blake2b-simd"
   packages = ["."]
@@ -258,6 +284,14 @@
   version = "v1.2"
 
 [[projects]]
+  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
+  version = "v0.8.0"
+
+[[projects]]
   digest = "1:8f4b365e527c00e2ba6b25a4c41ee7b84078c375fba83c971e54d2f0582df279"
   name = "github.com/rjeczalik/notify"
   packages = ["."]
@@ -304,6 +338,17 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:bdc3f44533dbd81b8536fb037792d8aa2597744ab3a57a5f57fd297267b40e7e"
+  name = "github.com/tyler-smith/go-bip39"
+  packages = [
+    ".",
+    "wordlists",
+  ]
+  pruneopts = "UT"
+  revision = "95c66720ed7ac2f4b78ddb31d940d59193894f49"
+
+[[projects]]
+  branch = "master"
   digest = "1:0102dfa2f98777db8ff68c920bef1be3ff8504e90485b6cdd24d61b981b487b6"
   name = "github.com/whyrusleeping/go-logging"
   packages = ["."]
@@ -320,11 +365,12 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:c532dce0138306d043cd22a4e78162a09e1b318eab7b45c4ba6f2cf84e100d93"
+  digest = "1:b8b52c750113e6d18943f273b3731ecd1a4351e21229c6e1650060c7a72f7d24"
   name = "golang.org/x/crypto"
   packages = [
     "blake2s",
     "pbkdf2",
+    "ripemd160",
     "scrypt",
     "sha3",
   ]
@@ -387,6 +433,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/ethereum/go-ethereum",
+    "github.com/ethereum/go-ethereum/accounts",
     "github.com/ethereum/go-ethereum/accounts/abi",
     "github.com/ethereum/go-ethereum/accounts/abi/bind",
     "github.com/ethereum/go-ethereum/common",
@@ -394,6 +441,8 @@
     "github.com/ethereum/go-ethereum/ethclient",
     "github.com/ethereum/go-ethereum/event",
     "github.com/ipfs/go-ipfs-api",
+    "github.com/miguelmota/go-ethereum-hdwallet",
+    "github.com/pkg/errors",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
