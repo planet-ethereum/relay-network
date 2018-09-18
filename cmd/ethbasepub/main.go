@@ -38,6 +38,26 @@ func main() {
 		log.Fatalf("failed to initialize ethbase: %v\n", err)
 	}
 
+	// Experiment: Try to prove last log exists within block
+	pastLogs, err := getPastLogs(client, emitterAddress)
+	if err != nil {
+		log.Fatalf("failed to get past logs: %v\n", err)
+	}
+	lastLog := pastLogs[len(pastLogs)-1]
+	proof, err := ethbase.GenerateLogProof(context.Background(), client, lastLog)
+	if err != nil {
+		log.Fatalf("failed to generate proof: %v\n", err)
+	}
+
+	ok, err := ethbase.VerifyLogProof(context.Background(), client, proof)
+	if err != nil {
+		log.Fatalf("failed to verify log proof: %v\n", err)
+	}
+	if !ok {
+		log.Fatalf("proof is invalid")
+	}
+
+	// Subscribe to incoming logs
 	query := ethereum.FilterQuery{
 		Addresses: []common.Address{
 			emitterAddress,
