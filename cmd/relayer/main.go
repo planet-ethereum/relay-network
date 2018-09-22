@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"os"
@@ -17,19 +18,19 @@ import (
 
 func main() {
 	// Connect to IPFS
-	ps, err := ipfs.NewIPFSPubSub("localhost:5001", "local-relay-network")
+	ps, err := ipfs.NewIPFSSub("localhost:5001", "local-relay-network")
 	if err != nil {
 		log.Fatalf("failed to subscribe to pubsub: %v", err)
 	}
 
 	// Connect to Ethereum client
-	client, err := ethclient.Dial("https://ropsten.infura.io")
+	client, err := ethclient.Dial("https://rinkeby.infura.io")
 	if err != nil {
 		log.Fatalf("failed to connect to ethclient: %v", err)
 	}
 
 	// Set up wallet
-	wal, err := wallet.NewHDWallet(os.Getenv("MNEMONIC"), "m/44'/60'/0'/0/5")
+	wal, err := wallet.NewHDWallet(os.Getenv("MNEMONIC"), "m/44'/60'/0'/0/2")
 	if err != nil {
 		log.Fatalf("failed to create wallet: %v\n", err)
 	}
@@ -42,7 +43,7 @@ func main() {
 	log.Printf("Account: %s\n", fromAddress.Hex())
 
 	// Set up ethbase
-	registryAddress := common.HexToAddress("0x8c42e8e89c4ee591d69fdc95803388d80290c46c")
+	registryAddress := common.HexToAddress("0xababd383f1debf1434193bb4a44e7476f3a0bd2c")
 	ethbase_, err := ethbase.NewEthbase(client, registryAddress)
 	if err != nil {
 		log.Fatalf("failed to instantiate ethbase: %v\n", err)
@@ -65,8 +66,8 @@ func main() {
 		err = json.Unmarshal(raw, &m)
 
 		if m.Kind == "ethbase" {
-			log.Printf("Submitting: Kind: %s\tTo: %s\tData: %v\tEventId: %v\n", m.Kind, m.To, m.Data, m.EventId)
-			if err = ethbase_.SubmitTx(wal, m); err != nil {
+			log.Printf("Submitting: Kind: %s\tTo: %s\tData: %v\n", m.Kind, m.To, m.Data)
+			if err = ethbase_.SubmitTx(context.Background(), wal, m); err != nil {
 				log.Printf("error: failed to submit tx: %v\n", err)
 			}
 		}

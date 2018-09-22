@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 
 	ethereum "github.com/ethereum/go-ethereum"
@@ -20,14 +19,14 @@ func main() {
 	ps := ipfs.NewIPFSPub("localhost:5001", "local-relay-network")
 
 	// Connect to Ethereum client
-	client, err := ethclient.Dial("wss://ropsten.infura.io/ws")
+	client, err := ethclient.Dial("wss://rinkeby.infura.io/ws")
 	if err != nil {
 		log.Fatalf("failed to connect to ethclient: %v", err)
 	}
 
-	emitterAddress := common.HexToAddress("0xfc8e2b378a37ea51b90049df56fad5f44cd35daf")
-	registryAddress := common.HexToAddress("0x8c42e8e89c4ee591d69fdc95803388d80290c46c")
-	//subscriberAddress := common.HexToAddress("0x065e983f32f905afbb26e7dbbcd21141afce3145")
+	emitterAddress := common.HexToAddress("0x8d4c2eea61d3694534f6b8d6433d1d7edfe82b34")
+	registryAddress := common.HexToAddress("0xababd383f1debf1434193bb4a44e7476f3a0bd2c")
+	//subscriberAddress := common.HexToAddress("0x95adff3bb970f6548254331c8f481e857b48a5d9")
 
 	instance, err := ethbase.NewEthbase(client, registryAddress)
 	if err != nil {
@@ -38,60 +37,20 @@ func main() {
 		log.Fatalf("failed to initialize ethbase: %v\n", err)
 	}
 
-	// Experiment: Try to prove last log exists within block
-	pastLogs, err := getPastLogs(client, emitterAddress)
-	if err != nil {
-		log.Fatalf("failed to get past logs: %v\n", err)
+	errCh := make(chan error)
+	msgCh := make(chan []byte)
+	if err := instance.Listen(context.Background(), msgCh, errCh, []common.Address{emitterAddress}); err != nil {
+		log.Fatalf("failed to listen for incoming events")
 	}
-	lastLog := pastLogs[len(pastLogs)-1]
-	proof, err := ethbase.GenerateLogProof(context.Background(), client, lastLog)
-	if err != nil {
-		log.Fatalf("failed to generate proof: %v\n", err)
-	}
-
-	ok, err := ethbase.VerifyLogProof(context.Background(), client, proof)
-	if err != nil {
-		log.Fatalf("failed to verify log proof: %v\n", err)
-	}
-	if !ok {
-		log.Fatalf("proof is invalid")
-	}
-
-	// Subscribe to incoming logs
-	query := ethereum.FilterQuery{
-		Addresses: []common.Address{
-			emitterAddress,
-		},
-	}
-
-	logs := make(chan types.Log)
-	sub, err := client.SubscribeFilterLogs(context.Background(), query, logs)
-	if err != nil {
-		log.Fatalf("failed to subscribe to logs: %v\n", err)
-	}
-
-	log.Println("Subscribed to logs")
 
 	for {
 		select {
-		case err := <-sub.Err():
-			sub.Unsubscribe()
-			log.Fatal(err)
-		case vLog := <-logs:
-			m, ok := instance.LogToMessage(vLog)
-			if !ok {
-				log.Printf("invalid log: %v\n", vLog)
-				continue
-			}
-
-			marshalized, err := json.Marshal(m)
-			if err != nil {
-				log.Fatalf("failed to marshalize message: %v\n", err)
-			}
-
-			if err = ps.Publish(string(marshalized)); err != nil {
+		case msg := <-msgCh:
+			if err = ps.Publish(string(msg)); err != nil {
 				log.Fatalf("failed to publish to pubsub: %v\n", err)
 			}
+		case err := <-errCh:
+			log.Fatalf("err from listener: %v\n", err)
 		}
 	}
 }

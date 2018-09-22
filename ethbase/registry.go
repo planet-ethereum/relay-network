@@ -4,6 +4,7 @@
 package ethbase
 
 import (
+	"math/big"
 	"strings"
 
 	ethereum "github.com/ethereum/go-ethereum"
@@ -15,7 +16,7 @@ import (
 )
 
 // RegistryABI is the input ABI used to generate the binding from.
-const RegistryABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"eventId\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"emitter\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"eventName_\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"method\",\"type\":\"bytes4\"}],\"name\":\"Subscribed\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"name\":\"emitter_\",\"type\":\"address\"},{\"name\":\"eventName_\",\"type\":\"bytes32\"},{\"name\":\"account_\",\"type\":\"address\"},{\"name\":\"method_\",\"type\":\"bytes4\"}],\"name\":\"subscribe\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"eventId_\",\"type\":\"bytes32\"},{\"name\":\"account_\",\"type\":\"address\"}],\"name\":\"unsubscribe\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"eventId_\",\"type\":\"bytes32\"},{\"name\":\"account_\",\"type\":\"address\"},{\"name\":\"args_\",\"type\":\"bytes\"}],\"name\":\"invoke\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+const RegistryABI = "[{\"constant\":true,\"inputs\":[{\"name\":\"_value\",\"type\":\"bytes\"},{\"name\":\"_parentNodes\",\"type\":\"bytes\"},{\"name\":\"_path\",\"type\":\"bytes\"},{\"name\":\"_blockHeader\",\"type\":\"bytes\"}],\"name\":\"verify\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_value\",\"type\":\"bytes\"},{\"name\":\"_parentNodes\",\"type\":\"bytes\"},{\"name\":\"_path\",\"type\":\"bytes\"},{\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"verifyProof\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"eventId\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"emitter\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"eventTopic\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"method\",\"type\":\"bytes4\"}],\"name\":\"Subscribed\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"name\":\"_emitter\",\"type\":\"address\"},{\"name\":\"_eventTopic\",\"type\":\"bytes32\"},{\"name\":\"_account\",\"type\":\"address\"},{\"name\":\"_method\",\"type\":\"bytes4\"}],\"name\":\"subscribe\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_eventId\",\"type\":\"bytes32\"},{\"name\":\"_subscriber\",\"type\":\"address\"}],\"name\":\"unsubscribe\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_receipt\",\"type\":\"bytes\"},{\"name\":\"_parentNodes\",\"type\":\"bytes\"},{\"name\":\"_key\",\"type\":\"bytes\"},{\"name\":\"_logIndex\",\"type\":\"uint256\"},{\"name\":\"_blockHeader\",\"type\":\"bytes\"},{\"name\":\"_subscriber\",\"type\":\"address\"},{\"name\":\"_eventId\",\"type\":\"bytes32\"}],\"name\":\"submitLog\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
 
 // Registry is an auto generated Go binding around an Ethereum contract.
 type Registry struct {
@@ -159,67 +160,119 @@ func (_Registry *RegistryTransactorRaw) Transact(opts *bind.TransactOpts, method
 	return _Registry.Contract.contract.Transact(opts, method, params...)
 }
 
-// Invoke is a paid mutator transaction binding the contract method 0x2e17e4c8.
+// Verify is a free data retrieval call binding the contract method 0x067874cf.
 //
-// Solidity: function invoke(eventId_ bytes32, account_ address, args_ bytes) returns()
-func (_Registry *RegistryTransactor) Invoke(opts *bind.TransactOpts, eventId_ [32]byte, account_ common.Address, args_ []byte) (*types.Transaction, error) {
-	return _Registry.contract.Transact(opts, "invoke", eventId_, account_, args_)
+// Solidity: function verify(_value bytes, _parentNodes bytes, _path bytes, _blockHeader bytes) constant returns(bool)
+func (_Registry *RegistryCaller) Verify(opts *bind.CallOpts, _value []byte, _parentNodes []byte, _path []byte, _blockHeader []byte) (bool, error) {
+	var (
+		ret0 = new(bool)
+	)
+	out := ret0
+	err := _Registry.contract.Call(opts, out, "verify", _value, _parentNodes, _path, _blockHeader)
+	return *ret0, err
 }
 
-// Invoke is a paid mutator transaction binding the contract method 0x2e17e4c8.
+// Verify is a free data retrieval call binding the contract method 0x067874cf.
 //
-// Solidity: function invoke(eventId_ bytes32, account_ address, args_ bytes) returns()
-func (_Registry *RegistrySession) Invoke(eventId_ [32]byte, account_ common.Address, args_ []byte) (*types.Transaction, error) {
-	return _Registry.Contract.Invoke(&_Registry.TransactOpts, eventId_, account_, args_)
+// Solidity: function verify(_value bytes, _parentNodes bytes, _path bytes, _blockHeader bytes) constant returns(bool)
+func (_Registry *RegistrySession) Verify(_value []byte, _parentNodes []byte, _path []byte, _blockHeader []byte) (bool, error) {
+	return _Registry.Contract.Verify(&_Registry.CallOpts, _value, _parentNodes, _path, _blockHeader)
 }
 
-// Invoke is a paid mutator transaction binding the contract method 0x2e17e4c8.
+// Verify is a free data retrieval call binding the contract method 0x067874cf.
 //
-// Solidity: function invoke(eventId_ bytes32, account_ address, args_ bytes) returns()
-func (_Registry *RegistryTransactorSession) Invoke(eventId_ [32]byte, account_ common.Address, args_ []byte) (*types.Transaction, error) {
-	return _Registry.Contract.Invoke(&_Registry.TransactOpts, eventId_, account_, args_)
+// Solidity: function verify(_value bytes, _parentNodes bytes, _path bytes, _blockHeader bytes) constant returns(bool)
+func (_Registry *RegistryCallerSession) Verify(_value []byte, _parentNodes []byte, _path []byte, _blockHeader []byte) (bool, error) {
+	return _Registry.Contract.Verify(&_Registry.CallOpts, _value, _parentNodes, _path, _blockHeader)
+}
+
+// VerifyProof is a free data retrieval call binding the contract method 0x4f7142ad.
+//
+// Solidity: function verifyProof(_value bytes, _parentNodes bytes, _path bytes, rootHash bytes32) constant returns(bool)
+func (_Registry *RegistryCaller) VerifyProof(opts *bind.CallOpts, _value []byte, _parentNodes []byte, _path []byte, rootHash [32]byte) (bool, error) {
+	var (
+		ret0 = new(bool)
+	)
+	out := ret0
+	err := _Registry.contract.Call(opts, out, "verifyProof", _value, _parentNodes, _path, rootHash)
+	return *ret0, err
+}
+
+// VerifyProof is a free data retrieval call binding the contract method 0x4f7142ad.
+//
+// Solidity: function verifyProof(_value bytes, _parentNodes bytes, _path bytes, rootHash bytes32) constant returns(bool)
+func (_Registry *RegistrySession) VerifyProof(_value []byte, _parentNodes []byte, _path []byte, rootHash [32]byte) (bool, error) {
+	return _Registry.Contract.VerifyProof(&_Registry.CallOpts, _value, _parentNodes, _path, rootHash)
+}
+
+// VerifyProof is a free data retrieval call binding the contract method 0x4f7142ad.
+//
+// Solidity: function verifyProof(_value bytes, _parentNodes bytes, _path bytes, rootHash bytes32) constant returns(bool)
+func (_Registry *RegistryCallerSession) VerifyProof(_value []byte, _parentNodes []byte, _path []byte, rootHash [32]byte) (bool, error) {
+	return _Registry.Contract.VerifyProof(&_Registry.CallOpts, _value, _parentNodes, _path, rootHash)
+}
+
+// SubmitLog is a paid mutator transaction binding the contract method 0x5599a1f6.
+//
+// Solidity: function submitLog(_receipt bytes, _parentNodes bytes, _key bytes, _logIndex uint256, _blockHeader bytes, _subscriber address, _eventId bytes32) returns()
+func (_Registry *RegistryTransactor) SubmitLog(opts *bind.TransactOpts, _receipt []byte, _parentNodes []byte, _key []byte, _logIndex *big.Int, _blockHeader []byte, _subscriber common.Address, _eventId [32]byte) (*types.Transaction, error) {
+	return _Registry.contract.Transact(opts, "submitLog", _receipt, _parentNodes, _key, _logIndex, _blockHeader, _subscriber, _eventId)
+}
+
+// SubmitLog is a paid mutator transaction binding the contract method 0x5599a1f6.
+//
+// Solidity: function submitLog(_receipt bytes, _parentNodes bytes, _key bytes, _logIndex uint256, _blockHeader bytes, _subscriber address, _eventId bytes32) returns()
+func (_Registry *RegistrySession) SubmitLog(_receipt []byte, _parentNodes []byte, _key []byte, _logIndex *big.Int, _blockHeader []byte, _subscriber common.Address, _eventId [32]byte) (*types.Transaction, error) {
+	return _Registry.Contract.SubmitLog(&_Registry.TransactOpts, _receipt, _parentNodes, _key, _logIndex, _blockHeader, _subscriber, _eventId)
+}
+
+// SubmitLog is a paid mutator transaction binding the contract method 0x5599a1f6.
+//
+// Solidity: function submitLog(_receipt bytes, _parentNodes bytes, _key bytes, _logIndex uint256, _blockHeader bytes, _subscriber address, _eventId bytes32) returns()
+func (_Registry *RegistryTransactorSession) SubmitLog(_receipt []byte, _parentNodes []byte, _key []byte, _logIndex *big.Int, _blockHeader []byte, _subscriber common.Address, _eventId [32]byte) (*types.Transaction, error) {
+	return _Registry.Contract.SubmitLog(&_Registry.TransactOpts, _receipt, _parentNodes, _key, _logIndex, _blockHeader, _subscriber, _eventId)
 }
 
 // Subscribe is a paid mutator transaction binding the contract method 0x4ff57300.
 //
-// Solidity: function subscribe(emitter_ address, eventName_ bytes32, account_ address, method_ bytes4) returns()
-func (_Registry *RegistryTransactor) Subscribe(opts *bind.TransactOpts, emitter_ common.Address, eventName_ [32]byte, account_ common.Address, method_ [4]byte) (*types.Transaction, error) {
-	return _Registry.contract.Transact(opts, "subscribe", emitter_, eventName_, account_, method_)
+// Solidity: function subscribe(_emitter address, _eventTopic bytes32, _account address, _method bytes4) returns()
+func (_Registry *RegistryTransactor) Subscribe(opts *bind.TransactOpts, _emitter common.Address, _eventTopic [32]byte, _account common.Address, _method [4]byte) (*types.Transaction, error) {
+	return _Registry.contract.Transact(opts, "subscribe", _emitter, _eventTopic, _account, _method)
 }
 
 // Subscribe is a paid mutator transaction binding the contract method 0x4ff57300.
 //
-// Solidity: function subscribe(emitter_ address, eventName_ bytes32, account_ address, method_ bytes4) returns()
-func (_Registry *RegistrySession) Subscribe(emitter_ common.Address, eventName_ [32]byte, account_ common.Address, method_ [4]byte) (*types.Transaction, error) {
-	return _Registry.Contract.Subscribe(&_Registry.TransactOpts, emitter_, eventName_, account_, method_)
+// Solidity: function subscribe(_emitter address, _eventTopic bytes32, _account address, _method bytes4) returns()
+func (_Registry *RegistrySession) Subscribe(_emitter common.Address, _eventTopic [32]byte, _account common.Address, _method [4]byte) (*types.Transaction, error) {
+	return _Registry.Contract.Subscribe(&_Registry.TransactOpts, _emitter, _eventTopic, _account, _method)
 }
 
 // Subscribe is a paid mutator transaction binding the contract method 0x4ff57300.
 //
-// Solidity: function subscribe(emitter_ address, eventName_ bytes32, account_ address, method_ bytes4) returns()
-func (_Registry *RegistryTransactorSession) Subscribe(emitter_ common.Address, eventName_ [32]byte, account_ common.Address, method_ [4]byte) (*types.Transaction, error) {
-	return _Registry.Contract.Subscribe(&_Registry.TransactOpts, emitter_, eventName_, account_, method_)
+// Solidity: function subscribe(_emitter address, _eventTopic bytes32, _account address, _method bytes4) returns()
+func (_Registry *RegistryTransactorSession) Subscribe(_emitter common.Address, _eventTopic [32]byte, _account common.Address, _method [4]byte) (*types.Transaction, error) {
+	return _Registry.Contract.Subscribe(&_Registry.TransactOpts, _emitter, _eventTopic, _account, _method)
 }
 
 // Unsubscribe is a paid mutator transaction binding the contract method 0xd59fd22f.
 //
-// Solidity: function unsubscribe(eventId_ bytes32, account_ address) returns()
-func (_Registry *RegistryTransactor) Unsubscribe(opts *bind.TransactOpts, eventId_ [32]byte, account_ common.Address) (*types.Transaction, error) {
-	return _Registry.contract.Transact(opts, "unsubscribe", eventId_, account_)
+// Solidity: function unsubscribe(_eventId bytes32, _subscriber address) returns()
+func (_Registry *RegistryTransactor) Unsubscribe(opts *bind.TransactOpts, _eventId [32]byte, _subscriber common.Address) (*types.Transaction, error) {
+	return _Registry.contract.Transact(opts, "unsubscribe", _eventId, _subscriber)
 }
 
 // Unsubscribe is a paid mutator transaction binding the contract method 0xd59fd22f.
 //
-// Solidity: function unsubscribe(eventId_ bytes32, account_ address) returns()
-func (_Registry *RegistrySession) Unsubscribe(eventId_ [32]byte, account_ common.Address) (*types.Transaction, error) {
-	return _Registry.Contract.Unsubscribe(&_Registry.TransactOpts, eventId_, account_)
+// Solidity: function unsubscribe(_eventId bytes32, _subscriber address) returns()
+func (_Registry *RegistrySession) Unsubscribe(_eventId [32]byte, _subscriber common.Address) (*types.Transaction, error) {
+	return _Registry.Contract.Unsubscribe(&_Registry.TransactOpts, _eventId, _subscriber)
 }
 
 // Unsubscribe is a paid mutator transaction binding the contract method 0xd59fd22f.
 //
-// Solidity: function unsubscribe(eventId_ bytes32, account_ address) returns()
-func (_Registry *RegistryTransactorSession) Unsubscribe(eventId_ [32]byte, account_ common.Address) (*types.Transaction, error) {
-	return _Registry.Contract.Unsubscribe(&_Registry.TransactOpts, eventId_, account_)
+// Solidity: function unsubscribe(_eventId bytes32, _subscriber address) returns()
+func (_Registry *RegistryTransactorSession) Unsubscribe(_eventId [32]byte, _subscriber common.Address) (*types.Transaction, error) {
+	return _Registry.Contract.Unsubscribe(&_Registry.TransactOpts, _eventId, _subscriber)
 }
 
 // RegistrySubscribedIterator is returned from FilterSubscribed and is used to iterate over the raw logs and unpacked data for Subscribed events raised by the Registry contract.
@@ -291,17 +344,17 @@ func (it *RegistrySubscribedIterator) Close() error {
 
 // RegistrySubscribed represents a Subscribed event raised by the Registry contract.
 type RegistrySubscribed struct {
-	EventId   [32]byte
-	Emitter   common.Address
-	EventName [32]byte
-	Account   common.Address
-	Method    [4]byte
-	Raw       types.Log // Blockchain specific contextual infos
+	EventId    [32]byte
+	Emitter    common.Address
+	EventTopic [32]byte
+	Account    common.Address
+	Method     [4]byte
+	Raw        types.Log // Blockchain specific contextual infos
 }
 
 // FilterSubscribed is a free log retrieval operation binding the contract event 0x04c9972fe596c2afdd8205c5d5cff160fdbbfc5254280890ce839b51fcdcad2f.
 //
-// Solidity: e Subscribed(eventId bytes32, emitter address, eventName_ bytes32, account address, method bytes4)
+// Solidity: e Subscribed(eventId bytes32, emitter address, eventTopic bytes32, account address, method bytes4)
 func (_Registry *RegistryFilterer) FilterSubscribed(opts *bind.FilterOpts) (*RegistrySubscribedIterator, error) {
 
 	logs, sub, err := _Registry.contract.FilterLogs(opts, "Subscribed")
@@ -313,7 +366,7 @@ func (_Registry *RegistryFilterer) FilterSubscribed(opts *bind.FilterOpts) (*Reg
 
 // WatchSubscribed is a free log subscription operation binding the contract event 0x04c9972fe596c2afdd8205c5d5cff160fdbbfc5254280890ce839b51fcdcad2f.
 //
-// Solidity: e Subscribed(eventId bytes32, emitter address, eventName_ bytes32, account address, method bytes4)
+// Solidity: e Subscribed(eventId bytes32, emitter address, eventTopic bytes32, account address, method bytes4)
 func (_Registry *RegistryFilterer) WatchSubscribed(opts *bind.WatchOpts, sink chan<- *RegistrySubscribed) (event.Subscription, error) {
 
 	logs, sub, err := _Registry.contract.WatchLogs(opts, "Subscribed")

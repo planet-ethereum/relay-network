@@ -2,6 +2,7 @@ package ethbase
 
 import (
 	"context"
+	"encoding/json"
 	"log"
 	"math/big"
 	"strings"
@@ -23,6 +24,12 @@ type Subscription struct {
 	EventName [32]byte
 	Account   common.Address
 	Method    [4]byte
+}
+
+type EthbaseMessage struct {
+	EventId [32]byte `json:"eventId"`
+	Data    []byte   `json:"data"` // Event parameters
+	Proof   LogProof `json:"proof"`
 }
 
 type Ethbase struct {
@@ -82,27 +89,47 @@ func (e *Ethbase) GetSubscriptions() ([]Subscription, error) {
 	return res, nil
 }
 
-func (e *Ethbase) LogToMessage(l types.Log) (relaynetwork.Message, bool) {
+func (e *Ethbase) LogToMessage(ctx context.Context, l types.Log) (*relaynetwork.Message, error) {
 	for _, sub := range e.subscriptions {
 		log.Printf("EventId: %v\tEmitter: %s\tAccount: %s\tData: %v\n", sub.EventId, sub.Emitter, sub.Account, sub.Method)
+
+		proof, err := GenerateLogProof(ctx, e.client, l)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to generate proof")
+		}
+
+		em := &EthbaseMessage{
+			Data:    l.Data,
+			EventId: sub.EventId,
+			Proof:   *proof,
+		}
+		raw, err := json.Marshal(em)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to marshalized ethbase message")
+		}
+
 		if sub.Emitter == l.Address {
-			m := relaynetwork.Message{
-				Kind:    "ethbase",
-				To:      sub.Account.Hex(),
-				Data:    l.Data,
-				EventId: sub.EventId,
+			m := &relaynetwork.Message{
+				Kind: "ethbase",
+				To:   sub.Account.Hex(),
+				Data: raw,
 			}
 
-			return m, true
+			return m, nil
 		}
 	}
 
-	return relaynetwork.Message{}, false
+	return nil, errors.New("no subscription found")
 }
 
-func (e *Ethbase) SubmitTx(wal *wallet.HDWallet, m relaynetwork.Message) error {
+func (e *Ethbase) SubmitTx(ctx context.Context, wal *wallet.HDWallet, m relaynetwork.Message) error {
 	if m.Kind != "ethbase" {
 		return errors.New("tx has wrong kind")
+	}
+
+	em := EthbaseMessage{}
+	if err := json.Unmarshal(m.Data, &em); err != nil {
+		return err
 	}
 
 	fromAddress, err := wal.Address()
@@ -110,17 +137,17 @@ func (e *Ethbase) SubmitTx(wal *wallet.HDWallet, m relaynetwork.Message) error {
 		return err
 	}
 
-	nonce, err := e.client.PendingNonceAt(context.Background(), fromAddress)
+	nonce, err := e.client.PendingNonceAt(ctx, fromAddress)
 	if err != nil {
 		return err
 	}
 
-	gasPrice, err := e.client.SuggestGasPrice(context.Background())
+	gasPrice, err := e.client.SuggestGasPrice(ctx)
 	if err != nil {
 		return err
 	}
 
-	gasLimit := uint64(100000)
+	gasLimit := uint64(300000)
 
 	auth, err := wal.NewKeyedTransactor()
 	if err != nil {
@@ -134,11 +161,60 @@ func (e *Ethbase) SubmitTx(wal *wallet.HDWallet, m relaynetwork.Message) error {
 
 	subscriber := common.HexToAddress(m.To)
 
-	tx, err := e.registry.Invoke(auth, m.EventId, subscriber, m.Data)
+	tx, err := e.registry.SubmitLog(
+		auth,
+		em.Proof.Value,
+		em.Proof.Proof,
+		em.Proof.Key,
+		big.NewInt(int64(em.Proof.LogIndex)),
+		em.Proof.Header,
+		subscriber,
+		em.EventId,
+	)
 
 	log.Printf("TX sent: %s\n", tx.Hash().Hex())
 
 	return err
+}
+
+// Listen subscribes to incoming logs.
+func (e *Ethbase) Listen(ctx context.Context, msgCh chan []byte, errCh chan error, emitters []common.Address) error {
+	query := ethereum.FilterQuery{Addresses: emitters}
+
+	logsCh := make(chan types.Log)
+	sub, err := e.client.SubscribeFilterLogs(ctx, query, logsCh)
+	if err != nil {
+		return err
+	}
+
+	log.Println("Subscribed to logs")
+	go e.listen(ctx, sub, logsCh, msgCh, errCh)
+
+	return nil
+}
+
+func (e *Ethbase) listen(ctx context.Context, sub ethereum.Subscription, logsCh chan types.Log, msgCh chan []byte, errCh chan error) {
+	for {
+		select {
+		case err := <-sub.Err():
+			sub.Unsubscribe()
+			errCh <- err
+			return
+		case vLog := <-logsCh:
+			m, err := e.LogToMessage(ctx, vLog)
+			if err != nil {
+				log.Printf("invalid log: %v\n", vLog)
+				continue
+			}
+
+			marshalized, err := json.Marshal(m)
+			if err != nil {
+				errCh <- errors.Wrap(err, "failed to marshalize message")
+			}
+
+			msgCh <- marshalized
+		}
+	}
 }
 
 func getPastLogs(client *ethclient.Client, address common.Address) ([]types.Log, error) {

@@ -15,14 +15,14 @@ import (
 )
 
 // LogProof contains everything that's necessary
-// to verify the inclusion of an event in a block
-// on chain.
+// to verify the inclusion of a log in a block's
+// receipts trie, on chain.
 type LogProof struct {
-	Header   *types.Header
-	Key      []byte
-	Value    []byte
-	LogIndex uint
-	Proof    trie.DatabaseReader
+	Value    []byte `json:"value"`
+	Proof    []byte `json:"proof"`
+	Key      []byte `json:"key"`
+	Header   []byte `json:"header"`
+	LogIndex uint   `json:"logIndex"`
 }
 
 // GenerateLogProof generates a LogProof instance
@@ -48,26 +48,41 @@ func GenerateLogProof(ctx context.Context, client *ethclient.Client, l types.Log
 	proof := ethdb.NewMemDatabase()
 	key, err := rlp.EncodeToBytes(l.TxIndex)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "failed to encode tx index")
 	}
 
+	proofs := make([]interface{}, 0)
 	if it := trie.NewIterator(tr.NodeIterator(key)); it.Next() && bytes.Equal(key, it.Key) {
 		for _, p := range it.Prove() {
 			proof.Put(crypto.Keccak256(p), p)
+			var decoded interface{}
+			if err := rlp.DecodeBytes(p, &decoded); err != nil {
+				return nil, errors.Wrap(err, "failed to decode proof node")
+			}
+			proofs = append(proofs, decoded)
 		}
 	}
+	proofBytes, err := rlp.EncodeToBytes(proofs)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to encode proof nodes to rlp")
+	}
 
-	logRawBuf := new(bytes.Buffer)
-	if err := l.EncodeRLP(logRawBuf); err != nil {
-		return nil, err
+	receiptBytes, err := rlp.EncodeToBytes(receipts[l.TxIndex])
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to encode receipt")
+	}
+
+	headerRaw, err := rlp.EncodeToBytes(header)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to encode header")
 	}
 
 	logProof := &LogProof{
-		Header:   header,
+		Value:    receiptBytes,
+		Proof:    proofBytes,
 		Key:      key,
-		Proof:    proof,
+		Header:   headerRaw,
 		LogIndex: uint(0), // TODO: Fix log index (l.Index returns weird number)
-		Value:    logRawBuf.Bytes(),
 	}
 
 	return logProof, nil
@@ -76,19 +91,34 @@ func GenerateLogProof(ctx context.Context, client *ethclient.Client, l types.Log
 // VerifyLogProof simulates verification of log proofs on-chain.
 // It only assumes blockNum -> blockHash is accessible.
 func VerifyLogProof(ctx context.Context, client *ethclient.Client, p *LogProof) (bool, error) {
-	block, err := client.BlockByNumber(ctx, p.Header.Number)
+	var header types.Header
+	if err := rlp.DecodeBytes(p.Header, &header); err != nil {
+		return false, err
+	}
+
+	block, err := client.BlockByNumber(ctx, header.Number)
 	if err != nil {
 		return false, err
 	}
 
-	if block.Hash() != p.Header.Hash() {
-		log.Printf("Invalid Proof: Proof Header hash: %s\tBlock Hash: %s\n", block.Hash().Hex(), p.Header.Hash().Hex())
+	if block.Hash() != header.Hash() {
+		log.Printf("Invalid Proof: Proof Header hash: %s\tBlock Hash: %s\n", block.Hash().Hex(), header.Hash().Hex())
 		return false, nil
+	}
+
+	var proofNodes [][]byte
+	if err := rlp.DecodeBytes(p.Proof, &proofNodes); err != nil {
+		return false, err
+	}
+
+	proof := ethdb.NewMemDatabase()
+	for _, n := range proofNodes {
+		proof.Put(crypto.Keccak256(n), n)
 	}
 
 	// Recover rlp encoded receipt from proof and receipt
 	// trie root.
-	receiptRaw, _, err := trie.VerifyProof(p.Header.ReceiptHash, p.Key, p.Proof)
+	receiptRaw, _, err := trie.VerifyProof(header.ReceiptHash, p.Key, proof)
 	lRaw, err := logFromReceipt(receiptRaw, p.LogIndex)
 	if err != nil {
 		return false, err

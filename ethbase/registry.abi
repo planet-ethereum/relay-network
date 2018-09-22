@@ -1,5 +1,67 @@
 [
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_value",
+        "type": "bytes"
+      },
+      {
+        "name": "_parentNodes",
+        "type": "bytes"
+      },
+      {
+        "name": "_path",
+        "type": "bytes"
+      },
+      {
+        "name": "_blockHeader",
+        "type": "bytes"
+      }
+    ],
+    "name": "verify",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_value",
+        "type": "bytes"
+      },
+      {
+        "name": "_parentNodes",
+        "type": "bytes"
+      },
+      {
+        "name": "_path",
+        "type": "bytes"
+      },
+      {
+        "name": "rootHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "verifyProof",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -14,7 +76,7 @@
       },
       {
         "indexed": false,
-        "name": "eventName_",
+        "name": "eventTopic",
         "type": "bytes32"
       },
       {
@@ -35,19 +97,19 @@
     "constant": false,
     "inputs": [
       {
-        "name": "emitter_",
+        "name": "_emitter",
         "type": "address"
       },
       {
-        "name": "eventName_",
+        "name": "_eventTopic",
         "type": "bytes32"
       },
       {
-        "name": "account_",
+        "name": "_account",
         "type": "address"
       },
       {
-        "name": "method_",
+        "name": "_method",
         "type": "bytes4"
       }
     ],
@@ -61,11 +123,11 @@
     "constant": false,
     "inputs": [
       {
-        "name": "eventId_",
+        "name": "_eventId",
         "type": "bytes32"
       },
       {
-        "name": "account_",
+        "name": "_subscriber",
         "type": "address"
       }
     ],
@@ -79,19 +141,35 @@
     "constant": false,
     "inputs": [
       {
-        "name": "eventId_",
-        "type": "bytes32"
+        "name": "_receipt",
+        "type": "bytes"
       },
       {
-        "name": "account_",
+        "name": "_parentNodes",
+        "type": "bytes"
+      },
+      {
+        "name": "_key",
+        "type": "bytes"
+      },
+      {
+        "name": "_logIndex",
+        "type": "uint256"
+      },
+      {
+        "name": "_blockHeader",
+        "type": "bytes"
+      },
+      {
+        "name": "_subscriber",
         "type": "address"
       },
       {
-        "name": "args_",
-        "type": "bytes"
+        "name": "_eventId",
+        "type": "bytes32"
       }
     ],
-    "name": "invoke",
+    "name": "submitLog",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
