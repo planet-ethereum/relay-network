@@ -13,7 +13,7 @@ In order to run a relayer, you'll need to have an IPFS node with pubsub enabled 
 ipfs daemon --enable-pubsub-experiment
 ```
 
-Furthermore, you'll need a local Ethereum chain running. An easy way to do that is by using [ganache-cli](https://github.com/trufflesuite/ganache-cli).
+Relayer also needs access to an Ethereum chain. By default, it connects to Rinkeby, through Infura.
 
 Clone the repository and install the dependencies via [dep](https://golang.github.io/dep/):
 
@@ -21,23 +21,15 @@ Clone the repository and install the dependencies via [dep](https://golang.githu
 dep ensure
 ```
 
-Due to an [issue]() in dep, `libsecp256k1` needs to be copied from `go-ethereum` source to vendored version:
-
-```bash
-cp -r \
-  "${GOPATH}/src/github.com/ethereum/go-ethereum/crypto/secp256k1/libsecp256k1" \
-  "vendor/github.com/ethereum/go-ethereum/crypto/secp256k1/"
-```
-
 ## Usage
-Run a relayer, which starts listening to a pubsub topic:
+Relay-network currently only works with [ethbase](https://github.com/planet-ethereum/ethbase). For using with ethbase, start a relayer, which listens on a pubsub topic, and submits the logs to the ethbase contract:
 
 ```bash
-go run cmd/relayer/main.go
+MNEMONIC="____" go run cmd/relayer/main.go
 ```
 
-Send a test message by running:
+Then, run `ethbasepub`, which subscribes to the logs emitted by event emitters registered in `Ethbase`, generates a proof for the log, and sends it to the `relayer` via IPFS pubsub.
 
 ```bash
-go run cmd/publisher/main.go
+go run cmd/ethbasepub/main.go
 ```
