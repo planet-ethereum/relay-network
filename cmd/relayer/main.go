@@ -12,8 +12,8 @@ import (
 	relaynetwork "github.com/planet-ethereum/relay-network"
 	ethbase "github.com/planet-ethereum/relay-network/ethbase"
 	ipfs "github.com/planet-ethereum/relay-network/ipfs"
+	safe "github.com/planet-ethereum/relay-network/safe"
 	wallet "github.com/planet-ethereum/relay-network/wallet"
-	//safe "github.com/planet-ethereum/relay-network/safe"
 )
 
 func main() {
@@ -53,6 +53,14 @@ func main() {
 		log.Fatalf("failed to initialize ethbase: %v\n", err)
 	}
 
+	// Set up safe
+	safeAddress := common.HexToAddress("0xd186b722d4bf23a4199ffc4c6767a5a36d136875")
+	safeContract, err := safe.NewSafe(safeAddress, client)
+	if err != nil {
+		log.Fatalf("failed to instantiate safe: %v\n", err)
+	}
+	safeRelayer := safe.NewSafeRelayer(client, safeContract)
+
 	log.Println("Starting to listen to pubsub topic")
 
 	// Run pubsub event loop
@@ -65,9 +73,13 @@ func main() {
 		m := relaynetwork.Message{}
 		err = json.Unmarshal(raw, &m)
 
+		log.Printf("Submitting: Kind: %s\tTo: %s\tData: %v\n", m.Kind, m.To, m.Data)
 		if m.Kind == "ethbase" {
-			log.Printf("Submitting: Kind: %s\tTo: %s\tData: %v\n", m.Kind, m.To, m.Data)
 			if err = ethbase_.SubmitTx(context.Background(), wal, m); err != nil {
+				log.Printf("error: failed to submit tx: %v\n", err)
+			}
+		} else if m.Kind == "safe" {
+			if err = safeRelayer.SubmitTx(context.Background(), wal, m); err != nil {
 				log.Printf("error: failed to submit tx: %v\n", err)
 			}
 		}
