@@ -16,7 +16,7 @@ import (
 )
 
 // SafeABI is the input ABI used to generate the binding from.
-const SafeABI = "[{\"constant\":false,\"inputs\":[{\"name\":\"owner\",\"type\":\"address\"},{\"name\":\"_threshold\",\"type\":\"uint256\"}],\"name\":\"addOwnerWithThreshold\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"DOMAIN_SEPARATOR_TYPEHASH\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"isOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"operation\",\"type\":\"uint8\"}],\"name\":\"execTransactionFromModule\",\"outputs\":[{\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"module\",\"type\":\"address\"}],\"name\":\"enableModule\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_threshold\",\"type\":\"uint256\"}],\"name\":\"changeThreshold\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_masterCopy\",\"type\":\"address\"}],\"name\":\"changeMasterCopy\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"SENTINEL_MODULES\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"SENTINEL_OWNERS\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getOwners\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"NAME\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"nonce\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getModules\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"SAFE_MSG_TYPEHASH\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"SAFE_TX_TYPEHASH\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"prevModule\",\"type\":\"address\"},{\"name\":\"module\",\"type\":\"address\"}],\"name\":\"disableModule\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"prevOwner\",\"type\":\"address\"},{\"name\":\"oldOwner\",\"type\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"swapOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getThreshold\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"domainSeparator\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"prevOwner\",\"type\":\"address\"},{\"name\":\"owner\",\"type\":\"address\"},{\"name\":\"_threshold\",\"type\":\"uint256\"}],\"name\":\"removeOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"VERSION\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"txHash\",\"type\":\"bytes32\"}],\"name\":\"ExecutionFailed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"AddedOwner\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"RemovedOwner\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"threshold\",\"type\":\"uint256\"}],\"name\":\"ChangedThreshold\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"module\",\"type\":\"address\"}],\"name\":\"EnabledModule\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"module\",\"type\":\"address\"}],\"name\":\"DisabledModule\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"newContract\",\"type\":\"address\"}],\"name\":\"ContractCreation\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"name\":\"_owners\",\"type\":\"address[]\"},{\"name\":\"_threshold\",\"type\":\"uint256\"},{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"setup\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"operation\",\"type\":\"uint8\"},{\"name\":\"safeTxGas\",\"type\":\"uint256\"},{\"name\":\"dataGas\",\"type\":\"uint256\"},{\"name\":\"gasPrice\",\"type\":\"uint256\"},{\"name\":\"gasToken\",\"type\":\"address\"},{\"name\":\"refundReceiver\",\"type\":\"address\"},{\"name\":\"signatures\",\"type\":\"bytes\"}],\"name\":\"execTransaction\",\"outputs\":[{\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"operation\",\"type\":\"uint8\"}],\"name\":\"requiredTxGas\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"hashToApprove\",\"type\":\"bytes32\"}],\"name\":\"approveHash\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"signMessage\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_data\",\"type\":\"bytes\"},{\"name\":\"_signature\",\"type\":\"bytes\"}],\"name\":\"isValidSignature\",\"outputs\":[{\"name\":\"isValid\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"message\",\"type\":\"bytes\"}],\"name\":\"getMessageHash\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"operation\",\"type\":\"uint8\"},{\"name\":\"safeTxGas\",\"type\":\"uint256\"},{\"name\":\"dataGas\",\"type\":\"uint256\"},{\"name\":\"gasPrice\",\"type\":\"uint256\"},{\"name\":\"gasToken\",\"type\":\"address\"},{\"name\":\"refundReceiver\",\"type\":\"address\"},{\"name\":\"_nonce\",\"type\":\"uint256\"}],\"name\":\"encodeTransactionData\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"operation\",\"type\":\"uint8\"},{\"name\":\"safeTxGas\",\"type\":\"uint256\"},{\"name\":\"dataGas\",\"type\":\"uint256\"},{\"name\":\"gasPrice\",\"type\":\"uint256\"},{\"name\":\"gasToken\",\"type\":\"address\"},{\"name\":\"refundReceiver\",\"type\":\"address\"},{\"name\":\"_nonce\",\"type\":\"uint256\"}],\"name\":\"getTransactionHash\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}]"
+const SafeABI = "[{\"constant\":false,\"inputs\":[{\"name\":\"owner\",\"type\":\"address\"},{\"name\":\"_threshold\",\"type\":\"uint256\"}],\"name\":\"addOwnerWithThreshold\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_owners\",\"type\":\"address[]\"},{\"name\":\"_threshold\",\"type\":\"uint256\"},{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"setup\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"isOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"operation\",\"type\":\"uint8\"}],\"name\":\"execTransactionFromModule\",\"outputs\":[{\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"module\",\"type\":\"address\"}],\"name\":\"enableModule\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_threshold\",\"type\":\"uint256\"}],\"name\":\"changeThreshold\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_masterCopy\",\"type\":\"address\"}],\"name\":\"changeMasterCopy\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"SENTINEL_MODULES\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"SENTINEL_OWNERS\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getOwners\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"NAME\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"nonce\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getModules\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"prevModule\",\"type\":\"address\"},{\"name\":\"module\",\"type\":\"address\"}],\"name\":\"disableModule\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"prevOwner\",\"type\":\"address\"},{\"name\":\"oldOwner\",\"type\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"swapOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getThreshold\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"prevOwner\",\"type\":\"address\"},{\"name\":\"owner\",\"type\":\"address\"},{\"name\":\"_threshold\",\"type\":\"uint256\"}],\"name\":\"removeOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"VERSION\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"txHash\",\"type\":\"bytes32\"}],\"name\":\"ExecutionFailed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"newContract\",\"type\":\"address\"}],\"name\":\"ContractCreation\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"operation\",\"type\":\"uint8\"},{\"name\":\"safeTxGas\",\"type\":\"uint256\"},{\"name\":\"dataGas\",\"type\":\"uint256\"},{\"name\":\"gasPrice\",\"type\":\"uint256\"},{\"name\":\"gasToken\",\"type\":\"address\"},{\"name\":\"signatures\",\"type\":\"bytes\"}],\"name\":\"execTransactionAndPaySubmitter\",\"outputs\":[{\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"operation\",\"type\":\"uint8\"}],\"name\":\"requiredTxGas\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"to\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"operation\",\"type\":\"uint8\"},{\"name\":\"safeTxGas\",\"type\":\"uint256\"},{\"name\":\"dataGas\",\"type\":\"uint256\"},{\"name\":\"gasPrice\",\"type\":\"uint256\"},{\"name\":\"gasToken\",\"type\":\"address\"},{\"name\":\"_nonce\",\"type\":\"uint256\"}],\"name\":\"getTransactionHash\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}]"
 
 // Safe is an auto generated Go binding around an Ethereum contract.
 type Safe struct {
@@ -160,32 +160,6 @@ func (_Safe *SafeTransactorRaw) Transact(opts *bind.TransactOpts, method string,
 	return _Safe.Contract.contract.Transact(opts, method, params...)
 }
 
-// DOMAINSEPARATORTYPEHASH is a free data retrieval call binding the contract method 0x1db61b54.
-//
-// Solidity: function DOMAIN_SEPARATOR_TYPEHASH() constant returns(bytes32)
-func (_Safe *SafeCaller) DOMAINSEPARATORTYPEHASH(opts *bind.CallOpts) ([32]byte, error) {
-	var (
-		ret0 = new([32]byte)
-	)
-	out := ret0
-	err := _Safe.contract.Call(opts, out, "DOMAIN_SEPARATOR_TYPEHASH")
-	return *ret0, err
-}
-
-// DOMAINSEPARATORTYPEHASH is a free data retrieval call binding the contract method 0x1db61b54.
-//
-// Solidity: function DOMAIN_SEPARATOR_TYPEHASH() constant returns(bytes32)
-func (_Safe *SafeSession) DOMAINSEPARATORTYPEHASH() ([32]byte, error) {
-	return _Safe.Contract.DOMAINSEPARATORTYPEHASH(&_Safe.CallOpts)
-}
-
-// DOMAINSEPARATORTYPEHASH is a free data retrieval call binding the contract method 0x1db61b54.
-//
-// Solidity: function DOMAIN_SEPARATOR_TYPEHASH() constant returns(bytes32)
-func (_Safe *SafeCallerSession) DOMAINSEPARATORTYPEHASH() ([32]byte, error) {
-	return _Safe.Contract.DOMAINSEPARATORTYPEHASH(&_Safe.CallOpts)
-}
-
 // NAME is a free data retrieval call binding the contract method 0xa3f4df7e.
 //
 // Solidity: function NAME() constant returns(string)
@@ -210,58 +184,6 @@ func (_Safe *SafeSession) NAME() (string, error) {
 // Solidity: function NAME() constant returns(string)
 func (_Safe *SafeCallerSession) NAME() (string, error) {
 	return _Safe.Contract.NAME(&_Safe.CallOpts)
-}
-
-// SAFEMSGTYPEHASH is a free data retrieval call binding the contract method 0xc0856ffc.
-//
-// Solidity: function SAFE_MSG_TYPEHASH() constant returns(bytes32)
-func (_Safe *SafeCaller) SAFEMSGTYPEHASH(opts *bind.CallOpts) ([32]byte, error) {
-	var (
-		ret0 = new([32]byte)
-	)
-	out := ret0
-	err := _Safe.contract.Call(opts, out, "SAFE_MSG_TYPEHASH")
-	return *ret0, err
-}
-
-// SAFEMSGTYPEHASH is a free data retrieval call binding the contract method 0xc0856ffc.
-//
-// Solidity: function SAFE_MSG_TYPEHASH() constant returns(bytes32)
-func (_Safe *SafeSession) SAFEMSGTYPEHASH() ([32]byte, error) {
-	return _Safe.Contract.SAFEMSGTYPEHASH(&_Safe.CallOpts)
-}
-
-// SAFEMSGTYPEHASH is a free data retrieval call binding the contract method 0xc0856ffc.
-//
-// Solidity: function SAFE_MSG_TYPEHASH() constant returns(bytes32)
-func (_Safe *SafeCallerSession) SAFEMSGTYPEHASH() ([32]byte, error) {
-	return _Safe.Contract.SAFEMSGTYPEHASH(&_Safe.CallOpts)
-}
-
-// SAFETXTYPEHASH is a free data retrieval call binding the contract method 0xccafc387.
-//
-// Solidity: function SAFE_TX_TYPEHASH() constant returns(bytes32)
-func (_Safe *SafeCaller) SAFETXTYPEHASH(opts *bind.CallOpts) ([32]byte, error) {
-	var (
-		ret0 = new([32]byte)
-	)
-	out := ret0
-	err := _Safe.contract.Call(opts, out, "SAFE_TX_TYPEHASH")
-	return *ret0, err
-}
-
-// SAFETXTYPEHASH is a free data retrieval call binding the contract method 0xccafc387.
-//
-// Solidity: function SAFE_TX_TYPEHASH() constant returns(bytes32)
-func (_Safe *SafeSession) SAFETXTYPEHASH() ([32]byte, error) {
-	return _Safe.Contract.SAFETXTYPEHASH(&_Safe.CallOpts)
-}
-
-// SAFETXTYPEHASH is a free data retrieval call binding the contract method 0xccafc387.
-//
-// Solidity: function SAFE_TX_TYPEHASH() constant returns(bytes32)
-func (_Safe *SafeCallerSession) SAFETXTYPEHASH() ([32]byte, error) {
-	return _Safe.Contract.SAFETXTYPEHASH(&_Safe.CallOpts)
 }
 
 // SENTINELMODULES is a free data retrieval call binding the contract method 0x85e332cd.
@@ -342,84 +264,6 @@ func (_Safe *SafeCallerSession) VERSION() (string, error) {
 	return _Safe.Contract.VERSION(&_Safe.CallOpts)
 }
 
-// DomainSeparator is a free data retrieval call binding the contract method 0xf698da25.
-//
-// Solidity: function domainSeparator() constant returns(bytes32)
-func (_Safe *SafeCaller) DomainSeparator(opts *bind.CallOpts) ([32]byte, error) {
-	var (
-		ret0 = new([32]byte)
-	)
-	out := ret0
-	err := _Safe.contract.Call(opts, out, "domainSeparator")
-	return *ret0, err
-}
-
-// DomainSeparator is a free data retrieval call binding the contract method 0xf698da25.
-//
-// Solidity: function domainSeparator() constant returns(bytes32)
-func (_Safe *SafeSession) DomainSeparator() ([32]byte, error) {
-	return _Safe.Contract.DomainSeparator(&_Safe.CallOpts)
-}
-
-// DomainSeparator is a free data retrieval call binding the contract method 0xf698da25.
-//
-// Solidity: function domainSeparator() constant returns(bytes32)
-func (_Safe *SafeCallerSession) DomainSeparator() ([32]byte, error) {
-	return _Safe.Contract.DomainSeparator(&_Safe.CallOpts)
-}
-
-// EncodeTransactionData is a free data retrieval call binding the contract method 0xe86637db.
-//
-// Solidity: function encodeTransactionData(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, refundReceiver address, _nonce uint256) constant returns(bytes)
-func (_Safe *SafeCaller) EncodeTransactionData(opts *bind.CallOpts, to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, refundReceiver common.Address, _nonce *big.Int) ([]byte, error) {
-	var (
-		ret0 = new([]byte)
-	)
-	out := ret0
-	err := _Safe.contract.Call(opts, out, "encodeTransactionData", to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, refundReceiver, _nonce)
-	return *ret0, err
-}
-
-// EncodeTransactionData is a free data retrieval call binding the contract method 0xe86637db.
-//
-// Solidity: function encodeTransactionData(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, refundReceiver address, _nonce uint256) constant returns(bytes)
-func (_Safe *SafeSession) EncodeTransactionData(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, refundReceiver common.Address, _nonce *big.Int) ([]byte, error) {
-	return _Safe.Contract.EncodeTransactionData(&_Safe.CallOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, refundReceiver, _nonce)
-}
-
-// EncodeTransactionData is a free data retrieval call binding the contract method 0xe86637db.
-//
-// Solidity: function encodeTransactionData(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, refundReceiver address, _nonce uint256) constant returns(bytes)
-func (_Safe *SafeCallerSession) EncodeTransactionData(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, refundReceiver common.Address, _nonce *big.Int) ([]byte, error) {
-	return _Safe.Contract.EncodeTransactionData(&_Safe.CallOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, refundReceiver, _nonce)
-}
-
-// GetMessageHash is a free data retrieval call binding the contract method 0x0a1028c4.
-//
-// Solidity: function getMessageHash(message bytes) constant returns(bytes32)
-func (_Safe *SafeCaller) GetMessageHash(opts *bind.CallOpts, message []byte) ([32]byte, error) {
-	var (
-		ret0 = new([32]byte)
-	)
-	out := ret0
-	err := _Safe.contract.Call(opts, out, "getMessageHash", message)
-	return *ret0, err
-}
-
-// GetMessageHash is a free data retrieval call binding the contract method 0x0a1028c4.
-//
-// Solidity: function getMessageHash(message bytes) constant returns(bytes32)
-func (_Safe *SafeSession) GetMessageHash(message []byte) ([32]byte, error) {
-	return _Safe.Contract.GetMessageHash(&_Safe.CallOpts, message)
-}
-
-// GetMessageHash is a free data retrieval call binding the contract method 0x0a1028c4.
-//
-// Solidity: function getMessageHash(message bytes) constant returns(bytes32)
-func (_Safe *SafeCallerSession) GetMessageHash(message []byte) ([32]byte, error) {
-	return _Safe.Contract.GetMessageHash(&_Safe.CallOpts, message)
-}
-
 // GetModules is a free data retrieval call binding the contract method 0xb2494df3.
 //
 // Solidity: function getModules() constant returns(address[])
@@ -498,30 +342,30 @@ func (_Safe *SafeCallerSession) GetThreshold() (*big.Int, error) {
 	return _Safe.Contract.GetThreshold(&_Safe.CallOpts)
 }
 
-// GetTransactionHash is a free data retrieval call binding the contract method 0xd8d11f78.
+// GetTransactionHash is a free data retrieval call binding the contract method 0xba08ea24.
 //
-// Solidity: function getTransactionHash(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, refundReceiver address, _nonce uint256) constant returns(bytes32)
-func (_Safe *SafeCaller) GetTransactionHash(opts *bind.CallOpts, to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, refundReceiver common.Address, _nonce *big.Int) ([32]byte, error) {
+// Solidity: function getTransactionHash(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, _nonce uint256) constant returns(bytes32)
+func (_Safe *SafeCaller) GetTransactionHash(opts *bind.CallOpts, to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, _nonce *big.Int) ([32]byte, error) {
 	var (
 		ret0 = new([32]byte)
 	)
 	out := ret0
-	err := _Safe.contract.Call(opts, out, "getTransactionHash", to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, refundReceiver, _nonce)
+	err := _Safe.contract.Call(opts, out, "getTransactionHash", to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, _nonce)
 	return *ret0, err
 }
 
-// GetTransactionHash is a free data retrieval call binding the contract method 0xd8d11f78.
+// GetTransactionHash is a free data retrieval call binding the contract method 0xba08ea24.
 //
-// Solidity: function getTransactionHash(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, refundReceiver address, _nonce uint256) constant returns(bytes32)
-func (_Safe *SafeSession) GetTransactionHash(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, refundReceiver common.Address, _nonce *big.Int) ([32]byte, error) {
-	return _Safe.Contract.GetTransactionHash(&_Safe.CallOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, refundReceiver, _nonce)
+// Solidity: function getTransactionHash(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, _nonce uint256) constant returns(bytes32)
+func (_Safe *SafeSession) GetTransactionHash(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, _nonce *big.Int) ([32]byte, error) {
+	return _Safe.Contract.GetTransactionHash(&_Safe.CallOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, _nonce)
 }
 
-// GetTransactionHash is a free data retrieval call binding the contract method 0xd8d11f78.
+// GetTransactionHash is a free data retrieval call binding the contract method 0xba08ea24.
 //
-// Solidity: function getTransactionHash(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, refundReceiver address, _nonce uint256) constant returns(bytes32)
-func (_Safe *SafeCallerSession) GetTransactionHash(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, refundReceiver common.Address, _nonce *big.Int) ([32]byte, error) {
-	return _Safe.Contract.GetTransactionHash(&_Safe.CallOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, refundReceiver, _nonce)
+// Solidity: function getTransactionHash(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, _nonce uint256) constant returns(bytes32)
+func (_Safe *SafeCallerSession) GetTransactionHash(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, _nonce *big.Int) ([32]byte, error) {
+	return _Safe.Contract.GetTransactionHash(&_Safe.CallOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, _nonce)
 }
 
 // IsOwner is a free data retrieval call binding the contract method 0x2f54bf6e.
@@ -595,27 +439,6 @@ func (_Safe *SafeSession) AddOwnerWithThreshold(owner common.Address, _threshold
 // Solidity: function addOwnerWithThreshold(owner address, _threshold uint256) returns()
 func (_Safe *SafeTransactorSession) AddOwnerWithThreshold(owner common.Address, _threshold *big.Int) (*types.Transaction, error) {
 	return _Safe.Contract.AddOwnerWithThreshold(&_Safe.TransactOpts, owner, _threshold)
-}
-
-// ApproveHash is a paid mutator transaction binding the contract method 0xd4d9bdcd.
-//
-// Solidity: function approveHash(hashToApprove bytes32) returns()
-func (_Safe *SafeTransactor) ApproveHash(opts *bind.TransactOpts, hashToApprove [32]byte) (*types.Transaction, error) {
-	return _Safe.contract.Transact(opts, "approveHash", hashToApprove)
-}
-
-// ApproveHash is a paid mutator transaction binding the contract method 0xd4d9bdcd.
-//
-// Solidity: function approveHash(hashToApprove bytes32) returns()
-func (_Safe *SafeSession) ApproveHash(hashToApprove [32]byte) (*types.Transaction, error) {
-	return _Safe.Contract.ApproveHash(&_Safe.TransactOpts, hashToApprove)
-}
-
-// ApproveHash is a paid mutator transaction binding the contract method 0xd4d9bdcd.
-//
-// Solidity: function approveHash(hashToApprove bytes32) returns()
-func (_Safe *SafeTransactorSession) ApproveHash(hashToApprove [32]byte) (*types.Transaction, error) {
-	return _Safe.Contract.ApproveHash(&_Safe.TransactOpts, hashToApprove)
 }
 
 // ChangeMasterCopy is a paid mutator transaction binding the contract method 0x7de7edef.
@@ -702,25 +525,25 @@ func (_Safe *SafeTransactorSession) EnableModule(module common.Address) (*types.
 	return _Safe.Contract.EnableModule(&_Safe.TransactOpts, module)
 }
 
-// ExecTransaction is a paid mutator transaction binding the contract method 0x6a761202.
+// ExecTransactionAndPaySubmitter is a paid mutator transaction binding the contract method 0x09529334.
 //
-// Solidity: function execTransaction(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, refundReceiver address, signatures bytes) returns(success bool)
-func (_Safe *SafeTransactor) ExecTransaction(opts *bind.TransactOpts, to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, refundReceiver common.Address, signatures []byte) (*types.Transaction, error) {
-	return _Safe.contract.Transact(opts, "execTransaction", to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, refundReceiver, signatures)
+// Solidity: function execTransactionAndPaySubmitter(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, signatures bytes) returns(success bool)
+func (_Safe *SafeTransactor) ExecTransactionAndPaySubmitter(opts *bind.TransactOpts, to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, signatures []byte) (*types.Transaction, error) {
+	return _Safe.contract.Transact(opts, "execTransactionAndPaySubmitter", to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, signatures)
 }
 
-// ExecTransaction is a paid mutator transaction binding the contract method 0x6a761202.
+// ExecTransactionAndPaySubmitter is a paid mutator transaction binding the contract method 0x09529334.
 //
-// Solidity: function execTransaction(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, refundReceiver address, signatures bytes) returns(success bool)
-func (_Safe *SafeSession) ExecTransaction(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, refundReceiver common.Address, signatures []byte) (*types.Transaction, error) {
-	return _Safe.Contract.ExecTransaction(&_Safe.TransactOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, refundReceiver, signatures)
+// Solidity: function execTransactionAndPaySubmitter(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, signatures bytes) returns(success bool)
+func (_Safe *SafeSession) ExecTransactionAndPaySubmitter(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, signatures []byte) (*types.Transaction, error) {
+	return _Safe.Contract.ExecTransactionAndPaySubmitter(&_Safe.TransactOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, signatures)
 }
 
-// ExecTransaction is a paid mutator transaction binding the contract method 0x6a761202.
+// ExecTransactionAndPaySubmitter is a paid mutator transaction binding the contract method 0x09529334.
 //
-// Solidity: function execTransaction(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, refundReceiver address, signatures bytes) returns(success bool)
-func (_Safe *SafeTransactorSession) ExecTransaction(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, refundReceiver common.Address, signatures []byte) (*types.Transaction, error) {
-	return _Safe.Contract.ExecTransaction(&_Safe.TransactOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, refundReceiver, signatures)
+// Solidity: function execTransactionAndPaySubmitter(to address, value uint256, data bytes, operation uint8, safeTxGas uint256, dataGas uint256, gasPrice uint256, gasToken address, signatures bytes) returns(success bool)
+func (_Safe *SafeTransactorSession) ExecTransactionAndPaySubmitter(to common.Address, value *big.Int, data []byte, operation uint8, safeTxGas *big.Int, dataGas *big.Int, gasPrice *big.Int, gasToken common.Address, signatures []byte) (*types.Transaction, error) {
+	return _Safe.Contract.ExecTransactionAndPaySubmitter(&_Safe.TransactOpts, to, value, data, operation, safeTxGas, dataGas, gasPrice, gasToken, signatures)
 }
 
 // ExecTransactionFromModule is a paid mutator transaction binding the contract method 0x468721a7.
@@ -742,27 +565,6 @@ func (_Safe *SafeSession) ExecTransactionFromModule(to common.Address, value *bi
 // Solidity: function execTransactionFromModule(to address, value uint256, data bytes, operation uint8) returns(success bool)
 func (_Safe *SafeTransactorSession) ExecTransactionFromModule(to common.Address, value *big.Int, data []byte, operation uint8) (*types.Transaction, error) {
 	return _Safe.Contract.ExecTransactionFromModule(&_Safe.TransactOpts, to, value, data, operation)
-}
-
-// IsValidSignature is a paid mutator transaction binding the contract method 0x20c13b0b.
-//
-// Solidity: function isValidSignature(_data bytes, _signature bytes) returns(isValid bool)
-func (_Safe *SafeTransactor) IsValidSignature(opts *bind.TransactOpts, _data []byte, _signature []byte) (*types.Transaction, error) {
-	return _Safe.contract.Transact(opts, "isValidSignature", _data, _signature)
-}
-
-// IsValidSignature is a paid mutator transaction binding the contract method 0x20c13b0b.
-//
-// Solidity: function isValidSignature(_data bytes, _signature bytes) returns(isValid bool)
-func (_Safe *SafeSession) IsValidSignature(_data []byte, _signature []byte) (*types.Transaction, error) {
-	return _Safe.Contract.IsValidSignature(&_Safe.TransactOpts, _data, _signature)
-}
-
-// IsValidSignature is a paid mutator transaction binding the contract method 0x20c13b0b.
-//
-// Solidity: function isValidSignature(_data bytes, _signature bytes) returns(isValid bool)
-func (_Safe *SafeTransactorSession) IsValidSignature(_data []byte, _signature []byte) (*types.Transaction, error) {
-	return _Safe.Contract.IsValidSignature(&_Safe.TransactOpts, _data, _signature)
 }
 
 // RemoveOwner is a paid mutator transaction binding the contract method 0xf8dc5dd9.
@@ -828,27 +630,6 @@ func (_Safe *SafeTransactorSession) Setup(_owners []common.Address, _threshold *
 	return _Safe.Contract.Setup(&_Safe.TransactOpts, _owners, _threshold, to, data)
 }
 
-// SignMessage is a paid mutator transaction binding the contract method 0x85a5affe.
-//
-// Solidity: function signMessage(_data bytes) returns()
-func (_Safe *SafeTransactor) SignMessage(opts *bind.TransactOpts, _data []byte) (*types.Transaction, error) {
-	return _Safe.contract.Transact(opts, "signMessage", _data)
-}
-
-// SignMessage is a paid mutator transaction binding the contract method 0x85a5affe.
-//
-// Solidity: function signMessage(_data bytes) returns()
-func (_Safe *SafeSession) SignMessage(_data []byte) (*types.Transaction, error) {
-	return _Safe.Contract.SignMessage(&_Safe.TransactOpts, _data)
-}
-
-// SignMessage is a paid mutator transaction binding the contract method 0x85a5affe.
-//
-// Solidity: function signMessage(_data bytes) returns()
-func (_Safe *SafeTransactorSession) SignMessage(_data []byte) (*types.Transaction, error) {
-	return _Safe.Contract.SignMessage(&_Safe.TransactOpts, _data)
-}
-
 // SwapOwner is a paid mutator transaction binding the contract method 0xe318b52b.
 //
 // Solidity: function swapOwner(prevOwner address, oldOwner address, newOwner address) returns()
@@ -868,250 +649,6 @@ func (_Safe *SafeSession) SwapOwner(prevOwner common.Address, oldOwner common.Ad
 // Solidity: function swapOwner(prevOwner address, oldOwner address, newOwner address) returns()
 func (_Safe *SafeTransactorSession) SwapOwner(prevOwner common.Address, oldOwner common.Address, newOwner common.Address) (*types.Transaction, error) {
 	return _Safe.Contract.SwapOwner(&_Safe.TransactOpts, prevOwner, oldOwner, newOwner)
-}
-
-// SafeAddedOwnerIterator is returned from FilterAddedOwner and is used to iterate over the raw logs and unpacked data for AddedOwner events raised by the Safe contract.
-type SafeAddedOwnerIterator struct {
-	Event *SafeAddedOwner // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *SafeAddedOwnerIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(SafeAddedOwner)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(SafeAddedOwner)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *SafeAddedOwnerIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *SafeAddedOwnerIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// SafeAddedOwner represents a AddedOwner event raised by the Safe contract.
-type SafeAddedOwner struct {
-	Owner common.Address
-	Raw   types.Log // Blockchain specific contextual infos
-}
-
-// FilterAddedOwner is a free log retrieval operation binding the contract event 0x9465fa0c962cc76958e6373a993326400c1c94f8be2fe3a952adfa7f60b2ea26.
-//
-// Solidity: e AddedOwner(owner address)
-func (_Safe *SafeFilterer) FilterAddedOwner(opts *bind.FilterOpts) (*SafeAddedOwnerIterator, error) {
-
-	logs, sub, err := _Safe.contract.FilterLogs(opts, "AddedOwner")
-	if err != nil {
-		return nil, err
-	}
-	return &SafeAddedOwnerIterator{contract: _Safe.contract, event: "AddedOwner", logs: logs, sub: sub}, nil
-}
-
-// WatchAddedOwner is a free log subscription operation binding the contract event 0x9465fa0c962cc76958e6373a993326400c1c94f8be2fe3a952adfa7f60b2ea26.
-//
-// Solidity: e AddedOwner(owner address)
-func (_Safe *SafeFilterer) WatchAddedOwner(opts *bind.WatchOpts, sink chan<- *SafeAddedOwner) (event.Subscription, error) {
-
-	logs, sub, err := _Safe.contract.WatchLogs(opts, "AddedOwner")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(SafeAddedOwner)
-				if err := _Safe.contract.UnpackLog(event, "AddedOwner", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// SafeChangedThresholdIterator is returned from FilterChangedThreshold and is used to iterate over the raw logs and unpacked data for ChangedThreshold events raised by the Safe contract.
-type SafeChangedThresholdIterator struct {
-	Event *SafeChangedThreshold // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *SafeChangedThresholdIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(SafeChangedThreshold)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(SafeChangedThreshold)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *SafeChangedThresholdIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *SafeChangedThresholdIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// SafeChangedThreshold represents a ChangedThreshold event raised by the Safe contract.
-type SafeChangedThreshold struct {
-	Threshold *big.Int
-	Raw       types.Log // Blockchain specific contextual infos
-}
-
-// FilterChangedThreshold is a free log retrieval operation binding the contract event 0x610f7ff2b304ae8903c3de74c60c6ab1f7d6226b3f52c5161905bb5ad4039c93.
-//
-// Solidity: e ChangedThreshold(threshold uint256)
-func (_Safe *SafeFilterer) FilterChangedThreshold(opts *bind.FilterOpts) (*SafeChangedThresholdIterator, error) {
-
-	logs, sub, err := _Safe.contract.FilterLogs(opts, "ChangedThreshold")
-	if err != nil {
-		return nil, err
-	}
-	return &SafeChangedThresholdIterator{contract: _Safe.contract, event: "ChangedThreshold", logs: logs, sub: sub}, nil
-}
-
-// WatchChangedThreshold is a free log subscription operation binding the contract event 0x610f7ff2b304ae8903c3de74c60c6ab1f7d6226b3f52c5161905bb5ad4039c93.
-//
-// Solidity: e ChangedThreshold(threshold uint256)
-func (_Safe *SafeFilterer) WatchChangedThreshold(opts *bind.WatchOpts, sink chan<- *SafeChangedThreshold) (event.Subscription, error) {
-
-	logs, sub, err := _Safe.contract.WatchLogs(opts, "ChangedThreshold")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(SafeChangedThreshold)
-				if err := _Safe.contract.UnpackLog(event, "ChangedThreshold", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
 }
 
 // SafeContractCreationIterator is returned from FilterContractCreation and is used to iterate over the raw logs and unpacked data for ContractCreation events raised by the Safe contract.
@@ -1236,250 +773,6 @@ func (_Safe *SafeFilterer) WatchContractCreation(opts *bind.WatchOpts, sink chan
 	}), nil
 }
 
-// SafeDisabledModuleIterator is returned from FilterDisabledModule and is used to iterate over the raw logs and unpacked data for DisabledModule events raised by the Safe contract.
-type SafeDisabledModuleIterator struct {
-	Event *SafeDisabledModule // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *SafeDisabledModuleIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(SafeDisabledModule)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(SafeDisabledModule)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *SafeDisabledModuleIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *SafeDisabledModuleIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// SafeDisabledModule represents a DisabledModule event raised by the Safe contract.
-type SafeDisabledModule struct {
-	Module common.Address
-	Raw    types.Log // Blockchain specific contextual infos
-}
-
-// FilterDisabledModule is a free log retrieval operation binding the contract event 0xaab4fa2b463f581b2b32cb3b7e3b704b9ce37cc209b5fb4d77e593ace4054276.
-//
-// Solidity: e DisabledModule(module address)
-func (_Safe *SafeFilterer) FilterDisabledModule(opts *bind.FilterOpts) (*SafeDisabledModuleIterator, error) {
-
-	logs, sub, err := _Safe.contract.FilterLogs(opts, "DisabledModule")
-	if err != nil {
-		return nil, err
-	}
-	return &SafeDisabledModuleIterator{contract: _Safe.contract, event: "DisabledModule", logs: logs, sub: sub}, nil
-}
-
-// WatchDisabledModule is a free log subscription operation binding the contract event 0xaab4fa2b463f581b2b32cb3b7e3b704b9ce37cc209b5fb4d77e593ace4054276.
-//
-// Solidity: e DisabledModule(module address)
-func (_Safe *SafeFilterer) WatchDisabledModule(opts *bind.WatchOpts, sink chan<- *SafeDisabledModule) (event.Subscription, error) {
-
-	logs, sub, err := _Safe.contract.WatchLogs(opts, "DisabledModule")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(SafeDisabledModule)
-				if err := _Safe.contract.UnpackLog(event, "DisabledModule", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// SafeEnabledModuleIterator is returned from FilterEnabledModule and is used to iterate over the raw logs and unpacked data for EnabledModule events raised by the Safe contract.
-type SafeEnabledModuleIterator struct {
-	Event *SafeEnabledModule // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *SafeEnabledModuleIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(SafeEnabledModule)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(SafeEnabledModule)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *SafeEnabledModuleIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *SafeEnabledModuleIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// SafeEnabledModule represents a EnabledModule event raised by the Safe contract.
-type SafeEnabledModule struct {
-	Module common.Address
-	Raw    types.Log // Blockchain specific contextual infos
-}
-
-// FilterEnabledModule is a free log retrieval operation binding the contract event 0xecdf3a3effea5783a3c4c2140e677577666428d44ed9d474a0b3a4c9943f8440.
-//
-// Solidity: e EnabledModule(module address)
-func (_Safe *SafeFilterer) FilterEnabledModule(opts *bind.FilterOpts) (*SafeEnabledModuleIterator, error) {
-
-	logs, sub, err := _Safe.contract.FilterLogs(opts, "EnabledModule")
-	if err != nil {
-		return nil, err
-	}
-	return &SafeEnabledModuleIterator{contract: _Safe.contract, event: "EnabledModule", logs: logs, sub: sub}, nil
-}
-
-// WatchEnabledModule is a free log subscription operation binding the contract event 0xecdf3a3effea5783a3c4c2140e677577666428d44ed9d474a0b3a4c9943f8440.
-//
-// Solidity: e EnabledModule(module address)
-func (_Safe *SafeFilterer) WatchEnabledModule(opts *bind.WatchOpts, sink chan<- *SafeEnabledModule) (event.Subscription, error) {
-
-	logs, sub, err := _Safe.contract.WatchLogs(opts, "EnabledModule")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(SafeEnabledModule)
-				if err := _Safe.contract.UnpackLog(event, "EnabledModule", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
 // SafeExecutionFailedIterator is returned from FilterExecutionFailed and is used to iterate over the raw logs and unpacked data for ExecutionFailed events raised by the Safe contract.
 type SafeExecutionFailedIterator struct {
 	Event *SafeExecutionFailed // Event containing the contract specifics and raw log
@@ -1582,128 +875,6 @@ func (_Safe *SafeFilterer) WatchExecutionFailed(opts *bind.WatchOpts, sink chan<
 				// New log arrived, parse the event and forward to the user
 				event := new(SafeExecutionFailed)
 				if err := _Safe.contract.UnpackLog(event, "ExecutionFailed", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// SafeRemovedOwnerIterator is returned from FilterRemovedOwner and is used to iterate over the raw logs and unpacked data for RemovedOwner events raised by the Safe contract.
-type SafeRemovedOwnerIterator struct {
-	Event *SafeRemovedOwner // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *SafeRemovedOwnerIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(SafeRemovedOwner)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(SafeRemovedOwner)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *SafeRemovedOwnerIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *SafeRemovedOwnerIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// SafeRemovedOwner represents a RemovedOwner event raised by the Safe contract.
-type SafeRemovedOwner struct {
-	Owner common.Address
-	Raw   types.Log // Blockchain specific contextual infos
-}
-
-// FilterRemovedOwner is a free log retrieval operation binding the contract event 0xf8d49fc529812e9a7c5c50e69c20f0dccc0db8fa95c98bc58cc9a4f1c1299eaf.
-//
-// Solidity: e RemovedOwner(owner address)
-func (_Safe *SafeFilterer) FilterRemovedOwner(opts *bind.FilterOpts) (*SafeRemovedOwnerIterator, error) {
-
-	logs, sub, err := _Safe.contract.FilterLogs(opts, "RemovedOwner")
-	if err != nil {
-		return nil, err
-	}
-	return &SafeRemovedOwnerIterator{contract: _Safe.contract, event: "RemovedOwner", logs: logs, sub: sub}, nil
-}
-
-// WatchRemovedOwner is a free log subscription operation binding the contract event 0xf8d49fc529812e9a7c5c50e69c20f0dccc0db8fa95c98bc58cc9a4f1c1299eaf.
-//
-// Solidity: e RemovedOwner(owner address)
-func (_Safe *SafeFilterer) WatchRemovedOwner(opts *bind.WatchOpts, sink chan<- *SafeRemovedOwner) (event.Subscription, error) {
-
-	logs, sub, err := _Safe.contract.WatchLogs(opts, "RemovedOwner")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(SafeRemovedOwner)
-				if err := _Safe.contract.UnpackLog(event, "RemovedOwner", log); err != nil {
 					return err
 				}
 				event.Raw = log
