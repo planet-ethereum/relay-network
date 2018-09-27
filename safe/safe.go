@@ -65,7 +65,7 @@ func (r *SafeRelayer) SubmitTx(ctx context.Context, wal *wallet.HDWallet, m rela
 		return err
 	}
 
-	gasLimit := uint64(300000)
+	gasLimit := uint64(150000)
 
 	auth, err := wal.NewKeyedTransactor()
 	if err != nil {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/hex"
 	"encoding/json"
 	"log"
 	"math/big"
@@ -76,17 +77,17 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to abi pack method and args: %v\n", err)
 	}
-	log.Printf("Data: %v\n", data)
 
-	zeroBig := big.NewInt(0)
+	zeroBig := new(big.Int)
 	zeroAddr := common.BigToAddress(zeroBig)
+	txGas := big.NewInt(50000)
 
 	sm := safe.SafeMessage{
 		To:        simpleStorageAddress,
 		Value:     zeroBig,
 		Data:      data,
 		Operation: 0,
-		SafeTxGas: zeroBig,
+		SafeTxGas: txGas,
 		DataGas:   zeroBig,
 		GasPrice:  zeroBig,
 		GasToken:  zeroAddr,
