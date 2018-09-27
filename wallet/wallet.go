@@ -1,6 +1,8 @@
 package wallet
 
 import (
+	"crypto/ecdsa"
+
 	accounts "github.com/ethereum/go-ethereum/accounts"
 	bind "github.com/ethereum/go-ethereum/accounts/abi/bind"
 	common "github.com/ethereum/go-ethereum/common"
@@ -37,8 +39,16 @@ func (w *HDWallet) Address() (common.Address, error) {
 	return w.wallet.Address(w.account)
 }
 
+func (w *HDWallet) PublicKey() (*ecdsa.PublicKey, error) {
+	return w.wallet.PublicKey(w.account)
+}
+
 func (w *HDWallet) SignTx(tx *types.Transaction) (*types.Transaction, error) {
 	return w.wallet.SignTx(w.account, tx, nil)
+}
+
+func (w *HDWallet) SignHash(hash []byte) ([]byte, error) {
+	return w.wallet.SignHash(w.account, hash)
 }
 
 func (w *HDWallet) NewKeyedTransactor() (*bind.TransactOpts, error) {
