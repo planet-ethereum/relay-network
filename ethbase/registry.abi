@@ -1,67 +1,5 @@
 [
   {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_value",
-        "type": "bytes"
-      },
-      {
-        "name": "_parentNodes",
-        "type": "bytes"
-      },
-      {
-        "name": "_path",
-        "type": "bytes"
-      },
-      {
-        "name": "_blockHeader",
-        "type": "bytes"
-      }
-    ],
-    "name": "verify",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_value",
-        "type": "bytes"
-      },
-      {
-        "name": "_parentNodes",
-        "type": "bytes"
-      },
-      {
-        "name": "_path",
-        "type": "bytes"
-      },
-      {
-        "name": "rootHash",
-        "type": "bytes32"
-      }
-    ],
-    "name": "verifyProof",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -91,7 +29,8 @@
       }
     ],
     "name": "Subscribed",
-    "type": "event"
+    "type": "event",
+    "signature": "0x04c9972fe596c2afdd8205c5d5cff160fdbbfc5254280890ce839b51fcdcad2f"
   },
   {
     "constant": false,
@@ -117,7 +56,8 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0x4ff57300"
   },
   {
     "constant": false,
@@ -135,7 +75,8 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0xd59fd22f"
   },
   {
     "constant": false,
@@ -173,6 +114,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0x5599a1f6"
   }
 ]

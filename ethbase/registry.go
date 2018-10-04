@@ -16,7 +16,7 @@ import (
 )
 
 // RegistryABI is the input ABI used to generate the binding from.
-const RegistryABI = "[{\"constant\":true,\"inputs\":[{\"name\":\"_value\",\"type\":\"bytes\"},{\"name\":\"_parentNodes\",\"type\":\"bytes\"},{\"name\":\"_path\",\"type\":\"bytes\"},{\"name\":\"_blockHeader\",\"type\":\"bytes\"}],\"name\":\"verify\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_value\",\"type\":\"bytes\"},{\"name\":\"_parentNodes\",\"type\":\"bytes\"},{\"name\":\"_path\",\"type\":\"bytes\"},{\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"verifyProof\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"eventId\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"emitter\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"eventTopic\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"method\",\"type\":\"bytes4\"}],\"name\":\"Subscribed\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"name\":\"_emitter\",\"type\":\"address\"},{\"name\":\"_eventTopic\",\"type\":\"bytes32\"},{\"name\":\"_account\",\"type\":\"address\"},{\"name\":\"_method\",\"type\":\"bytes4\"}],\"name\":\"subscribe\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_eventId\",\"type\":\"bytes32\"},{\"name\":\"_subscriber\",\"type\":\"address\"}],\"name\":\"unsubscribe\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_receipt\",\"type\":\"bytes\"},{\"name\":\"_parentNodes\",\"type\":\"bytes\"},{\"name\":\"_key\",\"type\":\"bytes\"},{\"name\":\"_logIndex\",\"type\":\"uint256\"},{\"name\":\"_blockHeader\",\"type\":\"bytes\"},{\"name\":\"_subscriber\",\"type\":\"address\"},{\"name\":\"_eventId\",\"type\":\"bytes32\"}],\"name\":\"submitLog\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+const RegistryABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"eventId\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"emitter\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"eventTopic\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"method\",\"type\":\"bytes4\"}],\"name\":\"Subscribed\",\"type\":\"event\",\"signature\":\"0x04c9972fe596c2afdd8205c5d5cff160fdbbfc5254280890ce839b51fcdcad2f\"},{\"constant\":false,\"inputs\":[{\"name\":\"_emitter\",\"type\":\"address\"},{\"name\":\"_eventTopic\",\"type\":\"bytes32\"},{\"name\":\"_account\",\"type\":\"address\"},{\"name\":\"_method\",\"type\":\"bytes4\"}],\"name\":\"subscribe\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"signature\":\"0x4ff57300\"},{\"constant\":false,\"inputs\":[{\"name\":\"_eventId\",\"type\":\"bytes32\"},{\"name\":\"_subscriber\",\"type\":\"address\"}],\"name\":\"unsubscribe\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"signature\":\"0xd59fd22f\"},{\"constant\":false,\"inputs\":[{\"name\":\"_receipt\",\"type\":\"bytes\"},{\"name\":\"_parentNodes\",\"type\":\"bytes\"},{\"name\":\"_key\",\"type\":\"bytes\"},{\"name\":\"_logIndex\",\"type\":\"uint256\"},{\"name\":\"_blockHeader\",\"type\":\"bytes\"},{\"name\":\"_subscriber\",\"type\":\"address\"},{\"name\":\"_eventId\",\"type\":\"bytes32\"}],\"name\":\"submitLog\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"signature\":\"0x5599a1f6\"}]"
 
 // Registry is an auto generated Go binding around an Ethereum contract.
 type Registry struct {
@@ -158,58 +158,6 @@ func (_Registry *RegistryTransactorRaw) Transfer(opts *bind.TransactOpts) (*type
 // Transact invokes the (paid) contract method with params as input values.
 func (_Registry *RegistryTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
 	return _Registry.Contract.contract.Transact(opts, method, params...)
-}
-
-// Verify is a free data retrieval call binding the contract method 0x067874cf.
-//
-// Solidity: function verify(_value bytes, _parentNodes bytes, _path bytes, _blockHeader bytes) constant returns(bool)
-func (_Registry *RegistryCaller) Verify(opts *bind.CallOpts, _value []byte, _parentNodes []byte, _path []byte, _blockHeader []byte) (bool, error) {
-	var (
-		ret0 = new(bool)
-	)
-	out := ret0
-	err := _Registry.contract.Call(opts, out, "verify", _value, _parentNodes, _path, _blockHeader)
-	return *ret0, err
-}
-
-// Verify is a free data retrieval call binding the contract method 0x067874cf.
-//
-// Solidity: function verify(_value bytes, _parentNodes bytes, _path bytes, _blockHeader bytes) constant returns(bool)
-func (_Registry *RegistrySession) Verify(_value []byte, _parentNodes []byte, _path []byte, _blockHeader []byte) (bool, error) {
-	return _Registry.Contract.Verify(&_Registry.CallOpts, _value, _parentNodes, _path, _blockHeader)
-}
-
-// Verify is a free data retrieval call binding the contract method 0x067874cf.
-//
-// Solidity: function verify(_value bytes, _parentNodes bytes, _path bytes, _blockHeader bytes) constant returns(bool)
-func (_Registry *RegistryCallerSession) Verify(_value []byte, _parentNodes []byte, _path []byte, _blockHeader []byte) (bool, error) {
-	return _Registry.Contract.Verify(&_Registry.CallOpts, _value, _parentNodes, _path, _blockHeader)
-}
-
-// VerifyProof is a free data retrieval call binding the contract method 0x4f7142ad.
-//
-// Solidity: function verifyProof(_value bytes, _parentNodes bytes, _path bytes, rootHash bytes32) constant returns(bool)
-func (_Registry *RegistryCaller) VerifyProof(opts *bind.CallOpts, _value []byte, _parentNodes []byte, _path []byte, rootHash [32]byte) (bool, error) {
-	var (
-		ret0 = new(bool)
-	)
-	out := ret0
-	err := _Registry.contract.Call(opts, out, "verifyProof", _value, _parentNodes, _path, rootHash)
-	return *ret0, err
-}
-
-// VerifyProof is a free data retrieval call binding the contract method 0x4f7142ad.
-//
-// Solidity: function verifyProof(_value bytes, _parentNodes bytes, _path bytes, rootHash bytes32) constant returns(bool)
-func (_Registry *RegistrySession) VerifyProof(_value []byte, _parentNodes []byte, _path []byte, rootHash [32]byte) (bool, error) {
-	return _Registry.Contract.VerifyProof(&_Registry.CallOpts, _value, _parentNodes, _path, rootHash)
-}
-
-// VerifyProof is a free data retrieval call binding the contract method 0x4f7142ad.
-//
-// Solidity: function verifyProof(_value bytes, _parentNodes bytes, _path bytes, rootHash bytes32) constant returns(bool)
-func (_Registry *RegistryCallerSession) VerifyProof(_value []byte, _parentNodes []byte, _path []byte, rootHash [32]byte) (bool, error) {
-	return _Registry.Contract.VerifyProof(&_Registry.CallOpts, _value, _parentNodes, _path, rootHash)
 }
 
 // SubmitLog is a paid mutator transaction binding the contract method 0x5599a1f6.
