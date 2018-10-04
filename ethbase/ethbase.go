@@ -2,6 +2,7 @@ package ethbase
 
 import (
 	"context"
+	"encoding/hex"
 	"encoding/json"
 	"log"
 	"math/big"
@@ -91,7 +92,13 @@ func (e *Ethbase) GetSubscriptions() ([]Subscription, error) {
 
 func (e *Ethbase) LogToMessage(ctx context.Context, l types.Log) (*relaynetwork.Message, error) {
 	for _, sub := range e.subscriptions {
-		log.Printf("EventId: %v\tEmitter: %s\tAccount: %s\tData: %v\n", sub.EventId, sub.Emitter, sub.Account, sub.Method)
+		log.Printf(
+			"EventId: %v\tEmitter: %s\tAccount: %s\tData: %v\n",
+			hex.EncodeToString(sub.EventId[:]),
+			sub.Emitter.Hex(),
+			sub.Account.Hex(),
+			hex.EncodeToString(sub.Method[:]),
+		)
 
 		proof, err := GenerateLogProof(ctx, e.client, l)
 		if err != nil {
@@ -203,7 +210,7 @@ func (e *Ethbase) listen(ctx context.Context, sub ethereum.Subscription, logsCh 
 		case vLog := <-logsCh:
 			m, err := e.LogToMessage(ctx, vLog)
 			if err != nil {
-				log.Printf("invalid log: %v\n", vLog)
+				log.Printf("failed to convert log to msg: %v\n", err)
 				continue
 			}
 

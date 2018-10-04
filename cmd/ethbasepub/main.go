@@ -24,8 +24,8 @@ func main() {
 		log.Fatalf("failed to connect to ethclient: %v", err)
 	}
 
-	emitterAddress := common.HexToAddress("0x8d4c2eea61d3694534f6b8d6433d1d7edfe82b34")
-	registryAddress := common.HexToAddress("0xababd383f1debf1434193bb4a44e7476f3a0bd2c")
+	emitterAddress := common.HexToAddress("0x7b76a89ef15ef6a63e8707f841c4afd498edddc8")
+	registryAddress := common.HexToAddress("0x2ccf778b371e24010b6733a377e999844bdc114a")
 	//subscriberAddress := common.HexToAddress("0x95adff3bb970f6548254331c8f481e857b48a5d9")
 
 	instance, err := ethbase.NewEthbase(client, registryAddress)

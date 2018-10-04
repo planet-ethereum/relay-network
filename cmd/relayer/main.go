@@ -43,7 +43,7 @@ func main() {
 	log.Printf("Account: %s\n", fromAddress.Hex())
 
 	// Set up ethbase
-	registryAddress := common.HexToAddress("0xababd383f1debf1434193bb4a44e7476f3a0bd2c")
+	registryAddress := common.HexToAddress("0x2ccf778b371e24010b6733a377e999844bdc114a")
 	ethbase_, err := ethbase.NewEthbase(client, registryAddress)
 	if err != nil {
 		log.Fatalf("failed to instantiate ethbase: %v\n", err)
