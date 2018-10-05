@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/hex"
 	"encoding/json"
 	"log"
 	"math/big"
@@ -14,6 +13,7 @@ import (
 	ethclient "github.com/ethereum/go-ethereum/ethclient"
 
 	relaynetwork "github.com/planet-ethereum/relay-network"
+	example "github.com/planet-ethereum/relay-network/cmd/example"
 	ipfs "github.com/planet-ethereum/relay-network/ipfs"
 	safe "github.com/planet-ethereum/relay-network/safe"
 	wallet "github.com/planet-ethereum/relay-network/wallet"
@@ -45,7 +45,7 @@ func main() {
 	simpleStorageAddress := common.HexToAddress("0xff4b6cd1ea4011756e6729746195df097b4f697a")
 	safeAddress := common.HexToAddress("0xd186b722d4bf23a4199ffc4c6767a5a36d136875")
 
-	ss, err := NewSimpleStorage(simpleStorageAddress, client)
+	ss, err := example.NewSimpleStorage(simpleStorageAddress, client)
 	if err != nil {
 		log.Fatalf("failed to instantiate simple storage: %v\n", err)
 	}
@@ -67,7 +67,7 @@ func main() {
 	}
 	log.Printf("Current value in storage: %v\n", res)
 
-	parsedABI, err := abi.JSON(strings.NewReader(SimpleStorageABI))
+	parsedABI, err := abi.JSON(strings.NewReader(example.SimpleStorageABI))
 	if err != nil {
 		log.Fatalf("failed to parse contract ABI: %v\n", err)
 	}
